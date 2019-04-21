@@ -1,2 +1,1 @@
-# 381FinalProject
-CS 381 final project
+# CS 381 Project 6
