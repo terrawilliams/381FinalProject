@@ -113,7 +113,7 @@ void GfxMgr::MakeGround(){
 	oceanSurface.normal = Ogre::Vector3::UNIT_Y;
 	oceanSurface.d = 0;
 	Ogre::MeshManager::getSingleton().createPlane(
-	    "ocean",
+	    "floor",
 	    Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
 	    //plane,
 		oceanSurface,
@@ -122,12 +122,12 @@ void GfxMgr::MakeGround(){
 	    1, 5, 5,
 	    Ogre::Vector3::UNIT_Z);
 
-	  Ogre::Entity* groundEntity = engine->gfxMgr->mSceneMgr->createEntity("ocean");
+	  Ogre::Entity* groundEntity = engine->gfxMgr->mSceneMgr->createEntity("floor");
 	  engine->gfxMgr->mSceneMgr->getRootSceneNode()->createChildSceneNode()->attachObject(groundEntity);
 	  groundEntity->setCastShadows(false);
 	  //groundEntity->setMaterialName("Ocean2_HLSL_GLSL");
 	  //groundEntity->setMaterialName("OceanHLSL_GLSL");
-	  groundEntity->setMaterialName("Ocean2_Cg");
+	  groundEntity->setMaterialName("Examples/GrassFloor");
 	  //groundEntity->setMaterialName("NavyCg");
 }
 

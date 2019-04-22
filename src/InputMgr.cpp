@@ -95,7 +95,8 @@ void InputMgr::Tick(float dt){
 //	mTrayMgr->frameRenderingQueued(fe);
 
 	UpdateCamera(dt);
-	UpdateVelocityAndSelection(dt);
+	UpdateSpawn(dt);
+	//UpdateVelocityAndSelection(dt);
 
 }
 
@@ -188,6 +189,31 @@ void InputMgr::UpdateVelocityAndSelection(float dt){
 	if((keyboardTimer < 0) && mKeyboard->isKeyDown(OIS::KC_TAB)){
 		keyboardTimer = keyTime;
 		engine->entityMgr->SelectNextEntity();
+	}
+}
+
+void InputMgr::UpdateSpawn(float dt)
+{
+	Command* c;
+	keyboardTimer -= dt;
+
+	if((keyboardTimer < 0) and mKeyboard->isKeyDown(OIS::KC_Z))
+	{
+		keyboardTimer = keyTime;
+		std::cout << "Z pushed////////////////////////" << std:: endl;
+		engine->entityMgr->CreateEntityOfTypeAtPosition(SpeedBoatType, Ogre::Vector3(-600, 0, 0));
+		engine->entityMgr->SelectNextEntity();
+		c = new MoveTo(this->engine->entityMgr->selectedEntity, Ogre::Vector3(600, 0, 0));
+		this->engine->entityMgr->selectedEntity->GetAI()->SetCommand(c);
+	}
+
+	if((keyboardTimer < 0) and mKeyboard->isKeyDown(OIS::KC_M))
+	{
+		keyboardTimer = keyTime;
+		engine->entityMgr->CreateEntityOfTypeAtPosition(SpeedBoatType, Ogre::Vector3(600, 0, 0));
+		engine->entityMgr->SelectNextEntity();
+		c = new MoveTo(this->engine->entityMgr->selectedEntity, Ogre::Vector3(-600, 0, 0));
+		this->engine->entityMgr->selectedEntity->GetAI()->SetCommand(c);
 	}
 }
 

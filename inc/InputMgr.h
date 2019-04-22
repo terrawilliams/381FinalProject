@@ -13,8 +13,8 @@
 #include <OISKeyboard.h>
 #include <OISMouse.h>
 
-#  include <SdkTrays.h>
-#  include <SdkCameraMan.h>
+#include <SdkTrays.h>
+#include <SdkCameraMan.h>
 #include <Mgr.h>
 
 class Engine;
@@ -40,8 +40,6 @@ public:
 	OIS::Keyboard* mKeyboard;
 	OIS::Mouse* mMouse;
 
-
-
 	void Init();
 	void Stop();
 	void Tick(float dt);
@@ -52,6 +50,7 @@ public:
 	float deltaDesiredSpeed, deltaDesiredHeading, deltaDesiredAltitude;
 	void UpdateCamera(float dt);
 	void UpdateVelocityAndSelection(float dt);
+	void UpdateSpawn(float dt);
 
 	void HandleMouseSelection(const OIS::MouseEvent& me);
 	void HandleCommands(const OIS::MouseEvent& me);
