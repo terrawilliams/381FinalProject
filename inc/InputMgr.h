@@ -13,10 +13,9 @@
 #include <OISKeyboard.h>
 #include <OISMouse.h>
 
-#include <SdkTrays.h>
-#include <SdkCameraMan.h>
+#  include <SdkTrays.h>
+#  include <SdkCameraMan.h>
 #include <Mgr.h>
-#include <Command.h>
 
 class Engine;
 
@@ -55,7 +54,7 @@ public:
 	void UpdateVelocityAndSelection(float dt);
 
 	void HandleMouseSelection(const OIS::MouseEvent& me);
-	void HandleMouseMoveTo(const OIS::MouseEvent& me);
+	void HandleCommands(const OIS::MouseEvent& me);
 	float selectionDistanceSquaredThreshold;
 
 

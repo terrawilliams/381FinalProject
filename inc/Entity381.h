@@ -8,13 +8,7 @@
 #include <Types381.h>
 
 #include <Engine.h>
-
-
-enum COMMAND_TYPE {
-	MOVETO,
-	INTERCEPT
-};
-class Command;
+#include <UnitAI.h>
 
 class Entity381
 {
@@ -28,9 +22,8 @@ public:
   int identity;
   std::string name;
   std::string meshfilename;
-  std::string soundSyscall;
   Ogre::SceneNode* sceneNode;
-  Ogre::Entity* ogreEntity;
+  Ogre::Entity*    ogreEntity;
   float acceleration, turnRate;
   float minSpeed, maxSpeed;
 
@@ -43,16 +36,16 @@ public:
 
   EntityTypes entityType;
 
-  std::vector<Aspect*> aspects;
+  std::vector<Aspect* > aspects;
 
   void Init();
 
   void Tick(float dt);
 
-  void addCommand(Command* cm);
-  void setCommand(Command* cm);
-  void playSound() const;
+  UnitAI* GetAI();
 
+private:
+  UnitAI* ai;
 
 protected:
 

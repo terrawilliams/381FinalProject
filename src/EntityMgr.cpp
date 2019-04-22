@@ -53,7 +53,6 @@ void EntityMgr::Select(int i){
 		selectedEntity->isSelected = true;
 		SetSelectedFlyingEntity();
 	}
-	selectedEntity->playSound();
 }
 
 

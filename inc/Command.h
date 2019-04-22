@@ -1,62 +1,33 @@
 /*
  * Command.h
  *
- *  Created on: Apr 7, 2019
- *      Author: imprice
+ *  Created on: Apr 28, 2018
+ *      Author: nathan
  */
 
 #ifndef INC_COMMAND_H_
 #define INC_COMMAND_H_
 
 #include <Entity381.h>
-#include <OgreVector3.h>
-#include <cmath>
 
-const double PI = 3.14159265;
-
-
-class Command {
-
-public:
-	Command(Entity381* ent, COMMAND_TYPE ct);
-	virtual ~Command();
-
-	virtual void init();
-	virtual void Tick(float dt);
-	virtual bool done();
-
-	Entity381* entity;
-	COMMAND_TYPE commandType;
-
-};
-
-class MoveTo: public Command {
-
-public:
-	MoveTo(Entity381* ent, Ogre::Vector3 location);
-	~MoveTo();
-
-	void init();
-	void Tick(float dt);
-	bool done();
-
-	Ogre::Vector3 targetLocation;
-	float MOVE_DISTANCE_THRESHOLD;
-	bool decelerating;
-
-};
-
-class Intercept: public Command
+class Command
 {
 public:
-	Intercept(Entity381* ent, Entity381* target);
-	~Intercept();
+	Command(Entity381* us) { isDone = false; ourEntity = us; };
+	virtual ~Command() {};
 
-	void init();
-	void Tick(float dt);
-	bool done();
+	virtual void Tick(float dt) = 0;
+	virtual void Finish() = 0;
 
-	Entity381* target;
+	bool IsDone()
+	{
+		return isDone;
+	}
+
+protected:
+	bool isDone;
+
+	Entity381* ourEntity;
 };
 
 #endif /* INC_COMMAND_H_ */

@@ -22,11 +22,7 @@ void Aspect::Tick(float dt){
 }
 
 
-void Aspect::addCommand(Command* cm)
-{}
 
-void Aspect::setCommand(Command* cm)
-{std::cout << "commandyboi set" << std::endl;}
 
 Renderable::Renderable(Entity381* ent):Aspect(ent){
 

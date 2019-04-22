@@ -17,9 +17,7 @@ std::string IntToString(int x){
 	return std::string(tmp);
 }
 
-Entity381::Entity381(Engine *engine, Ogre::Vector3 pos, int ident)
-: soundSyscall("play '~/wavs/duck-quack2.wav'")
-{
+Entity381::Entity381(Engine *engine, Ogre::Vector3 pos, int ident){
 
 	this->engine = engine;
 
@@ -42,8 +40,8 @@ Entity381::Entity381(Engine *engine, Ogre::Vector3 pos, int ident)
 	aspects.push_back((Aspect*) phx);
 	Renderable * renderable = new Renderable(this);
 	aspects.push_back((Aspect*)renderable);
-	UnitAI* unitAI = new UnitAI(this);
-	aspects.push_back((Aspect*)unitAI);
+	ai = new UnitAI(this);
+	aspects.push_back((Aspect*)ai);
 
 	this->acceleration = 0;
 	this->desiredHeading = this->heading = 0;
@@ -55,6 +53,11 @@ Entity381::Entity381(Engine *engine, Ogre::Vector3 pos, int ident)
 
 Entity381::~Entity381(){
 
+}
+
+UnitAI* Entity381::GetAI()
+{
+	return ai;
 }
 
 void Entity381::Init(){
@@ -71,37 +74,6 @@ void Entity381::Tick(float dt){
 	}
 }
 
-void Entity381::addCommand(Command* cm)
-{
-	for(Aspect* aspect : aspects)
-	{
-		aspect->addCommand(cm);
-	}
-
-}
-
-void Entity381::setCommand(Command* cm)
-{
-	for(Aspect* aspect : aspects)
-	{
-		aspect->setCommand(cm);
-	}
-}
-
-void Entity381::playSound() const
-{
-	pid_t forkThread = fork();
-	if( forkThread < 0 )
-	{
-		std::cerr << "Failed to create playSound thread" << std::endl;
-	} else if( forkThread == 0 )
-	{
-		// Child process
-		system( soundSyscall.c_str() );
-		exit(0);
-	}
-}
-
 //-------------------------------------------------------------------------------------------------------------------------------
 DDG51::DDG51(Engine *engine, Ogre::Vector3 pos, int ident):
 		Entity381(engine, pos, ident){
@@ -113,7 +85,6 @@ DDG51::DDG51(Engine *engine, Ogre::Vector3 pos, int ident):
 	this->acceleration = 5.0f; // fast
 	this->turnRate = 20.0f; //4 degrees per second
 	std::cout << "Created: " << this->name << std::endl;
-	this->soundSyscall = "play '~/wavs/Explosion 4-SoundBible.com-1605604378.wav'";
 }
 
 DDG51::~DDG51(){
@@ -129,7 +100,6 @@ Carrier::Carrier(Engine *engine, Ogre::Vector3 pos, int ident):
 	this->maxSpeed = 20.0f;//meters per second...
 	this->acceleration = 1.0f; // slow
 	this->turnRate = 10.0f; //2 degrees per second
-	this->soundSyscall = "play '~/wavs/happypika.wav' ";
 }
 
 Carrier::~Carrier(){
@@ -145,7 +115,6 @@ SpeedBoat::SpeedBoat(Engine *engine, Ogre::Vector3 pos, int ident):
 	this->maxSpeed = 30.0f;//meters per second...
 	this->acceleration = 5.0f; // slow
 	this->turnRate = 30.0f; //2 degrees per second
-	this->soundSyscall = "play '~/wavs/duck-quack2.wav'";
 }
 
 SpeedBoat::~SpeedBoat(){
@@ -161,7 +130,6 @@ Frigate::Frigate(Engine *engine, Ogre::Vector3 pos, int ident):
 	this->maxSpeed = 15.0f;//meters per second...
 	this->acceleration = 5.0f; // slow
 	this->turnRate = 20.0f; //2 degrees per second
-	this->soundSyscall = "play '~/wavs/crow-1.wav'";
 }
 
 Frigate::~Frigate(){
@@ -177,7 +145,6 @@ Alien::Alien(Engine *engine, Ogre::Vector3 pos, int ident):
 	this->maxSpeed = 50.0f;//meters per second...
 	this->acceleration = 10.0f; // slow
 	this->turnRate = 40.0f; //2 degrees per second
-	this->soundSyscall = "play '~/wavs/laser17.wav'";
 }
 
 Alien::~Alien(){

@@ -1,43 +1,53 @@
 /*
  * UnitAI.cpp
  *
- *  Created on: Apr 7, 2019
- *      Author: imprice
+ *  Created on: Apr 28, 2018
+ *      Author: nathan
  */
-#include "UnitAI.h"
 
+#include <UnitAI.h>
+#include <Entity381.h>
+#include <Command.h>
 
-
-UnitAI::UnitAI(Entity381* ent): Aspect(ent)
-{
-
-}
-
-UnitAI::~UnitAI()
-{
+UnitAI::UnitAI(Entity381* ent):Aspect(ent){
 
 }
 
-void UnitAI::addCommand(Command* c)
-{
-	commands.push_back(c);
+UnitAI::~UnitAI(){
+
 }
 
-void UnitAI::setCommand(Command* c)
-{
-	commands.clear();
-	commands.push_front(c);
-}
 
-void UnitAI::Tick(float dt)
-{
-	if( !commands.empty() )
+void UnitAI::Tick(float dt){
+	//A command exists
+	if(!this->commands.empty())
 	{
-		commands.front()->Tick(dt);
-		if( commands.front()->done() )
+		//get oldest command
+		Command* doCommand = this->commands.front();
+
+		doCommand->Tick(dt);
+
+		//remove the command if it completed from our last tick
+		if(doCommand->IsDone())
 		{
-			commands.pop_front();
+			doCommand->Finish();
+
+			this->commands.pop_front();
+
+			delete doCommand;//no leaks
 		}
 	}
+}
 
+void UnitAI::AddCommand(Command *c)
+{
+	this->commands.push_back(c);
+}
+
+void UnitAI::SetCommand(Command* c)
+{
+	std::cout << "set" << std::endl;
+
+	this->commands.clear();
+	AddCommand(c);
 }
