@@ -50,7 +50,7 @@ void GameMgr::LoadLevel(){
 
 	  // A node to attach the camera to so we can move the camera node instead of the camera.
 	  cameraNode = engine->gfxMgr->mSceneMgr->getRootSceneNode()->createChildSceneNode();
-	  cameraNode->setPosition(0, 200, 500);
+	  cameraNode->setPosition(0, 100, 1000);
 	  cameraNode->attachObject(engine->gfxMgr->mCamera);
 
 	  engine->gfxMgr->MakeGround();
