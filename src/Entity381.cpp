@@ -117,7 +117,7 @@ Carrier::~Carrier(){
 
 SpeedBoat::SpeedBoat(Engine *engine, Ogre::Vector3 pos, int ident):
 		Entity381(engine, pos, ident){
-	meshfilename = "cigarette.mesh";
+	meshfilename = "penguin.mesh";
 	entityType = SpeedBoatType;
 	this->minSpeed = 0;
 	this->maxSpeed = 30.0f;//meters per second...
@@ -132,7 +132,7 @@ SpeedBoat::~SpeedBoat(){
 
 Frigate::Frigate(Engine *engine, Ogre::Vector3 pos, int ident):
 		Entity381(engine, pos, ident){
-	meshfilename = "sleek.mesh";
+	meshfilename = "penguin.mesh";
 	entityType = FrigateType;
 	this->minSpeed = 0;
 	this->maxSpeed = 15.0f;//meters per second...
