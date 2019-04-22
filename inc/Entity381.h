@@ -38,6 +38,14 @@ public:
 
   std::vector<Aspect* > aspects;
 
+	//sound
+	bool didSelectSoundPlay;
+	std::string soundFile;
+	bool playSound;
+	unsigned int auioId;
+
+	unsigned int entityId;
+
   void Init();
 
   void Tick(float dt);

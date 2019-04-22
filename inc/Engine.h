@@ -7,6 +7,7 @@
 
 #ifndef ENGINE_H_
 #define ENGINE_H_
+#include "SoundMgr.h"
 
 class EntityMgr;
 class GameMgr;
@@ -22,6 +23,7 @@ public:
 	GameMgr   *gameMgr;
 	GfxMgr    *gfxMgr;
 	InputMgr  *inputMgr;
+	OgreSND::SoundMgr *soundMgr;
 
 	void Init();
 	void Run();
