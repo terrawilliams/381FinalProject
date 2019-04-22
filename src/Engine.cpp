@@ -45,7 +45,7 @@ void Engine::Init(){
 	gfxMgr->LoadLevel();
 	inputMgr->LoadLevel();
 	gameMgr->LoadLevel();
-	soundMgr->Init();
+	soundMgr->LoadLevel();
 }
 
 

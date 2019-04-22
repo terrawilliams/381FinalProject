@@ -52,7 +52,7 @@ SoundMgr::~SoundMgr(){
 	std::cout << "Bye audio. ....   Sounds good, bye" << std::endl;
 }
 
-void SoundMgr::init(){
+void SoundMgr::Init(){
 	initialize();
 }
 
@@ -77,7 +77,7 @@ void SoundMgr::initialize(void){
 	for(int i = 0; i < OgreSND::maxAudioSources; i++){
 		this->sourceInfo[i].source = 0;
 		this->sourceInfo[i].inUse = false;
-                this->sourceDictionary.push_back("");
+		this->sourceDictionary.push_back("");
 	}
 
 	//alGenBuffers(OgreSND::maxAudioBuffers, this->buffersInfo.buffers);
@@ -175,6 +175,7 @@ void SoundMgr::syncListenerToCamera(){
 	this->position[1] = cameraPosition.y;
 	this->position[2] = cameraPosition.z;
 	alListener3f(AL_POSITION, cameraPosition.x, cameraPosition.y, cameraPosition.z);
+
 	printError("Cannot set listener position");
 
 	//Ogre::Vector3 cameraVelocity = engine->gfxMgr->mCamera->velocity; // not set by graphics
@@ -206,7 +207,7 @@ void SoundMgr::syncListenerToCamera(){
 
 bool SoundMgr::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
-	tick(evt.timeSinceLastFrame);
+	Tick(evt.timeSinceLastFrame);
 	return true;
 }
 bool SoundMgr::frameStarted(const Ogre::FrameEvent& evt){
@@ -223,14 +224,13 @@ void SoundMgr::crosslink(void){
 	return;
 }
 
-void SoundMgr::loadLevel(void){
+void SoundMgr::LoadLevel(void){
 	syncListenerToCamera();
 	//load sounds, bind buffers, start background music
 	//read sound files
 
 	//load background, start, loop
 	//loadStartBackground();
-
 
 	return;
 }
@@ -239,18 +239,17 @@ void SoundMgr::loadLevel(void){
 void SoundMgr::attachSelectedNodeToSoundIndex(Entity381 *ent, unsigned int index){
 
         
-        this->playAudio(this->sourceInfo[index].source, true);  //second argument is added as true since it was causing nonresponsiveness when method is called again before the sound ends
+	this->playAudio(this->sourceInfo[index].source, true);  //second argument is added as true since it was causing nonresponsiveness when method is called again before the sound ends
 	Ogre::Vector3 pos = ent->position;
 	setSoundPosition(this->sourceInfo[index].source, pos);
 }
 
-void SoundMgr::tick(double dtime){
+void SoundMgr::Tick(double dtime){
 
 	syncListenerToCamera();
-        
         //selection sound
 		for(std::vector<Entity381 *>::const_iterator it = engine->entityMgr->entities.begin(); it != engine->entityMgr->entities.end(); ++it){
-           if ((*it)->isSelected && !(*it)->didSelectSoundPlay){
+			if ((*it)->isSelected && !(*it)->didSelectSoundPlay){
         	   playSelectionSound(*(*it));
         	   (*it)->didSelectSoundPlay = true;
            }
@@ -381,6 +380,7 @@ void SoundMgr::printAudioDevices(const ALCchar *devices){
 
 int SoundMgr::printError(const char *ermsg){
 	ALCenum error = alGetError();
+
 	if (error != AL_NO_ERROR){
 		std::cerr << "SoundManager: ERROR: "<< ermsg << std::endl;
 		return -1;
