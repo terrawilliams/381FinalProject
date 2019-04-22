@@ -10,6 +10,7 @@
 #include <Engine.h>
 #include <UnitAI.h>
 
+
 class Entity381
 {
 public:
@@ -54,6 +55,7 @@ public:
 
 private:
   UnitAI* ai;
+  static unsigned int nextId;
 
 protected:
 

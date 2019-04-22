@@ -11,6 +11,9 @@
 #include<Physics2D.h>
 #include<UnitAI.h>
 
+
+unsigned int Entity381::nextId = 0;
+
 std::string IntToString(int x){
 	char tmp[10000];
 	sprintf(tmp, "%i", x);
@@ -48,6 +51,11 @@ Entity381::Entity381(Engine *engine, Ogre::Vector3 pos, int ident){
 	this->turnRate = 0;
 	this->desiredSpeed = this->speed = 0;
 	this->minSpeed = this->maxSpeed = 0;
+	this->soundFile = "Boat-Sound.wav";
+	this->auioId = 0;
+	this->didSelectSoundPlay = false;
+	this->playSound = false;
+	this->entityId = Entity381::nextId++;
 
 }
 
