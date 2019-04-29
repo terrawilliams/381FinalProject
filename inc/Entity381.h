@@ -34,6 +34,7 @@ public:
   bool isSelected;
   float desiredHeading, desiredSpeed;
   float heading, speed;
+  float maxHealth, currentHealth;
 
   EntityTypes entityType;
 

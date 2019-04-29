@@ -91,6 +91,8 @@ Basic::Basic(Engine *engine, Ogre::Vector3 pos, int ident):
 	this->maxSpeed = 50.0f;//meters per second...
 	this->acceleration = 10.0f; // slow
 	this->turnRate = 40.0f; //2 degrees per second
+	maxHealth = 10;
+	currentHealth = maxHealth;
 }
 
 Basic::~Basic(){
