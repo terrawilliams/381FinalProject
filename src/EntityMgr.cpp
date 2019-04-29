@@ -101,13 +101,6 @@ void EntityMgr::LoadLevel()
 
 void EntityMgr::Tick(float dt)
 {
-	for(int i = 0; i < player1->units.size(); i++)
-	{
-		player1->units[i]->Tick(dt);
-	}
-
-	for(int i = 0; i < player2->units.size(); i++)
-	{
-		player2->units[i]->Tick(dt);
-	}
+	player1->Tick(dt);
+	player2->Tick(dt);
 }

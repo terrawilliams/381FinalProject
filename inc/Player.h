@@ -18,12 +18,15 @@ public:
 
 	void CreateBase(Engine* engine, Ogre::Vector3 pos);
 	void SpawnUnit(char keyPressed);
+	void Tick(float dt);
 
 	Engine* engine;
 	Player* enemy;
 	std::vector<Entity381*> units;
 	Ogre::Entity* playerBase;
 	char spawnKey;
+	int maxHealth;
+	int currentHealth;
 };
 
 #endif /* PLAYER_H_ */
