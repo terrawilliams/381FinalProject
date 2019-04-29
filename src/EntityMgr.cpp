@@ -127,11 +127,17 @@ void EntityMgr::Tick(float dt)
 	player1->Tick(dt);
 	player2->Tick(dt);
 
+	CheckCollidingUnits();
+	CheckBaseCollision();
+}
+
+void EntityMgr::CheckCollidingUnits()
+{
 	for(int i = 0; i < player1->units.size(); i++)
 	{
 		for(int j = 0; j < player2->units.size(); j++)
 		{
-			if(SqrDistanceBetween(player1->units[i]->position, player2->units[j]->position) < 4)
+			if(SqrDistanceBetween(player1->units[i]->position, player2->units[j]->position) < 16)
 			{
 				if(player1->units[i]->currentHealth > player2->units[j]->currentHealth)
 				{
@@ -153,6 +159,31 @@ void EntityMgr::Tick(float dt)
 					player2->units.erase(player2->units.begin());
 				}
 			}
+		}
+	}
+}
+
+void EntityMgr::CheckBaseCollision()
+{
+	for(int i = 0; i < player1->units.size(); i++)
+	{
+		std::cout << "Base Position: (" << player2->basePosition.x << ", " << player2->basePosition.y << ", " << player2->basePosition.z << ")" << std::endl;
+		std::cout << "SqrDistanceBetween " << i << " and base: " << SqrDistanceBetween(player1->units[i]->position, player2->basePosition) << std::endl;
+		if(SqrDistanceBetween(player1->units[i]->position, player2->basePosition) < 100)
+		{
+			player2->currentHealth -= player1->units[i]->currentHealth;
+			engine->gfxMgr->mSceneMgr->destroyEntity(player1->units[i]->ogreEntity);
+			player1->units.erase(player1->units.begin());
+		}
+	}
+
+	for(int i = 0; i < player2->units.size(); i++)
+	{
+		if(SqrDistanceBetween(player2->units[i]->position, player1->basePosition) < 100)
+		{
+			player1->currentHealth -= player2->units[i]->currentHealth;
+			engine->gfxMgr->mSceneMgr->destroyEntity(player2->units[i]->ogreEntity);
+			player2->units.erase(player2->units.begin());
 		}
 	}
 }

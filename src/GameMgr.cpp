@@ -50,6 +50,31 @@ void GameMgr::LoadLevel()
 	  //MakeEntities();
 }
 
+void GameMgr::Tick(float dt)
+{
+	if(engine->entityMgr->player1->currentHealth <= 0)
+	{
+		engine->gfxMgr->mSceneMgr->destroyEntity(engine->entityMgr->player1->playerBase);
+		//Player2Wins();
+	}
+
+	else if(engine->entityMgr->player2->currentHealth <= 0)
+	{
+		engine->gfxMgr->mSceneMgr->destroyEntity(engine->entityMgr->player2->playerBase);
+		//Player1Wins();
+	}
+}
+
+void GameMgr::Player1Wins()
+{
+
+}
+
+void GameMgr::Player2Wins()
+{
+
+}
+
 void GameMgr::MakeEntities()
 {
 	/*Ogre::Vector3 pos = Ogre::Vector3(-1000, 0, 0);

@@ -31,11 +31,34 @@ Player::~Player()
 	// TODO Auto-generated destructor stub
 }
 
+float Player::SqrDistanceBetween(Ogre::Vector3 ent1Pos, Ogre::Vector3 ent2Pos)
+
+{
+	float difX, difY, difZ;
+	float difXSqr, difYSqr, difZSqr;
+	float distanceSqr;
+
+	difX = ent1Pos.x - ent2Pos.x;
+	difY = ent1Pos.y - ent2Pos.y;
+	difZ = ent1Pos.z - ent2Pos.z;
+
+	difXSqr = difX * difX;
+	difYSqr = difY * difY;
+	difZSqr = difZ * difZ;
+
+	distanceSqr = difXSqr + difYSqr + difZSqr;
+
+	return distanceSqr;
+}
+
 void Player::CreateBase(Engine* engine, Ogre::Vector3 pos)
 {
 	playerBase = engine->gfxMgr->mSceneMgr->createEntity("cube.mesh");
 	Ogre::SceneNode* sceneNode = engine->gfxMgr->mSceneMgr->getRootSceneNode()->createChildSceneNode(pos);
 	sceneNode->attachObject(playerBase);
+
+	basePosition = pos;
+	basePosition.y = 0;
 }
 
 void Player::SpawnUnit(char keyPressed)
@@ -55,11 +78,22 @@ void Player::Tick(float dt)
 {
 	Command* c;
 
+	for(int i = 0; i < enemy->units.size(); i++)
+	{
+		if(SqrDistanceBetween(enemy->units[i]->position, basePosition) < 36)
+		{
+			std::cout << "Enemy collided with base///////////////////////////////\n\n" << std::endl;
+			currentHealth -= enemy->units[i]->currentHealth;
+			engine->gfxMgr->mSceneMgr->destroyEntity(enemy->units[i]->ogreEntity);
+			enemy->units.erase(enemy->units.begin());
+		}
+	}
+
 	for(int i = 0; i < units.size(); i++)
 	{
 		if(enemy->units.empty())
 		{
-			c = new MoveTo(units[i], enemy->playerBase->getParentNode()->getPosition());
+			c = new MoveTo(units[i], enemy->basePosition);
 		}
 		else
 		{

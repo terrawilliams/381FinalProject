@@ -33,6 +33,8 @@ public:
   void Select(int index);
   void Destroy(Entity381* destroyedEnt);
   float SqrDistanceBetween(Ogre::Vector3 ent1Pos, Ogre::Vector3 ent2Pos);
+  void CheckCollidingUnits();
+  void CheckBaseCollision();
 
   void LoadLevel();
   void Tick(float dt);

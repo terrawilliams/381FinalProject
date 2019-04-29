@@ -16,11 +16,15 @@ public:
 	virtual ~GameMgr();
 
 	void Init();
+	void Tick(float dt);
 	void LoadLevel();
 
 	void MakeGround();
 	void MakeSky();
 	void MakeEntities();
+
+	void Player1Wins();
+	void Player2Wins();
 
 	Ogre::SceneNode *cameraNode;
 
