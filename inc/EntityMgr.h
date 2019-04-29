@@ -6,6 +6,7 @@
 #include <Entity381.h>
 #include <FlyingEntity381.h>
 #include <Types381.h>
+#include "Player.h"
 
 class EntityMgr: public Mgr {
 public:
@@ -13,6 +14,9 @@ public:
   virtual ~EntityMgr();
 
   //Engine *engine;
+
+  Player *player1;
+  Player *player2;
 
   std::vector<Entity381*> entities;
   Entity381* selectedEntity;
@@ -27,6 +31,7 @@ public:
   void SetSelectedFlyingEntity();
   void Select(int index);
 
+  void LoadLevel();
   void Tick(float dt);
 
 protected:

@@ -200,7 +200,6 @@ void InputMgr::UpdateSpawn(float dt)
 	if((keyboardTimer < 0) and mKeyboard->isKeyDown(OIS::KC_Z))
 	{
 		keyboardTimer = keyTime;
-		std::cout << "Z pushed////////////////////////" << std:: endl;
 		engine->entityMgr->CreateEntityOfTypeAtPosition(SpeedBoatType, Ogre::Vector3(-600, 0, 0));
 		engine->entityMgr->SelectNextEntity();
 		c = new MoveTo(this->engine->entityMgr->selectedEntity, Ogre::Vector3(600, 0, 0));

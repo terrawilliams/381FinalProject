@@ -30,23 +30,15 @@ void GameMgr::Init(){
 
 }
 
-void GameMgr::LoadLevel(){
-
+void GameMgr::LoadLevel()
+{
 	  engine->gfxMgr->mSceneMgr->setAmbientLight(Ogre::ColourValue(0.5, 0.5, 0.5));
 
 	  engine->gfxMgr->mCamera->lookAt(Ogre::Vector3(0, 0, 0));
 	  Ogre::Light* light = engine->gfxMgr->mSceneMgr->createLight("MainLight");
 	  light->setPosition(20.0, 80.0, 50.0);
 
-	  // a fixed point in the ocean so you can see relative motion
 
-	  Ogre::Entity* player1Base = engine->gfxMgr->mSceneMgr->createEntity("robot.mesh");
-	  Ogre::SceneNode* sceneNode1 = engine->gfxMgr->mSceneMgr->getRootSceneNode()->createChildSceneNode(Ogre::Vector3(-600, 0, 0));
-	  sceneNode1->attachObject(player1Base);
-
-	  Ogre::Entity* player2Base = engine->gfxMgr->mSceneMgr->createEntity("robot.mesh");
-	  Ogre::SceneNode* sceneNode2 = engine->gfxMgr->mSceneMgr->getRootSceneNode()->createChildSceneNode(Ogre::Vector3(600, 0, 0));
-	  sceneNode2->attachObject(player2Base);
 
 	  // A node to attach the camera to so we can move the camera node instead of the camera.
 	  cameraNode = engine->gfxMgr->mSceneMgr->getRootSceneNode()->createChildSceneNode();

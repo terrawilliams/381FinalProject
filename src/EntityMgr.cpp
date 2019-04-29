@@ -94,6 +94,12 @@ void EntityMgr::CreateEntityOfTypeAtPosition(EntityTypes entType, Ogre::Vector3 
 
 }
 
+void EntityMgr::LoadLevel()
+{
+	player1->CreateBase(engine);
+	player2->CreateBase(engine);
+}
+
 void EntityMgr::Tick(float dt){
 	for(int i = 0; i < count; i++){
 		entities[i]->Tick(dt);
