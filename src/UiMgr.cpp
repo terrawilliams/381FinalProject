@@ -154,7 +154,7 @@ void UiMgr::buttonHit(OgreBites::Button *b){
         pos.x = 0;
         pos.y = 0;
         pos.z = -100;
-        engine->entityMgr->CreateEntityOfTypeAtPosition(SpeedBoatType,pos);
+        engine->entityMgr->CreatePlayer1UnitOfType(SpeedBoatType);
     }
     else if(b->getName()=="SelectButton")
         {
@@ -171,15 +171,15 @@ void UiMgr::itemSelected(OgreBites::SelectMenu *m){
     pos.z = 100;
     switch(m->getSelectionIndex()){
     case 1:
-    	engine->entityMgr->CreateEntityOfTypeAtPosition(SpeedBoatType,pos);
+    	engine->entityMgr->CreatePlayer1UnitOfType(SpeedBoatType);
     	mLabel->setCaption("SpeedBoat has Arrived!");
     	break;
     case 2:
-    	engine->entityMgr->CreateEntityOfTypeAtPosition(DDG51Type,pos);
+    	engine->entityMgr->CreatePlayer1UnitOfType(DDG51Type);
     	mLabel->setCaption("DDG51 has Arrived!");
     	break;
     case 3:
-    	engine->entityMgr->CreateEntityOfTypeAtPosition(CarrierType,pos);
+    	engine->entityMgr->CreatePlayer1UnitOfType(CarrierType);
     	mLabel->setCaption("Carrier has Arrived!");
     	break;
     default:

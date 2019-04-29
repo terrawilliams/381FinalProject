@@ -8,10 +8,12 @@
 #include "Player.h"
 #include "Engine.h"
 #include "GfxMgr.h"
+#include "EntityMgr.h"
+#include "Command.h"
 
-Player::Player()
+Player::Player(Engine* newEngine)
 {
-
+	engine = newEngine;
 }
 
 Player::Player(char newSpawnKey)
@@ -33,9 +35,14 @@ void Player::CreateBase(Engine* engine, Ogre::Vector3 pos)
 
 void Player::SpawnUnit(char keyPressed)
 {
+	Command* c;
+
 	if(keyPressed == spawnKey)
 	{
-
+		/*engine->entityMgr->CreateEntityOfTypeAtPosition(SpeedBoatType, Ogre::Vector3(-600, 0, 0));
+		engine->entityMgr->SelectNextEntity();
+		c = new MoveTo(unit, enemy->playerBase->mParentNode->getPosition());
+		this->engine->entityMgr->selectedEntity->GetAI()->SetCommand(c);*/
 	}
 }
 

@@ -32,7 +32,7 @@ Banshee::Banshee(Engine *engine, Ogre::Vector3 pos, int ident):
 		FlyingEntity381(engine, pos, ident) {
 	// TODO Auto-generated constructor stub
 	meshfilename = "banshee.mesh";
-	entityType = BansheeType;
+	entityType = None;
 
 	acceleration = 10.0f;
 	turnRate = 10.0f;

@@ -50,8 +50,9 @@ void GameMgr::LoadLevel()
 	  //MakeEntities();
 }
 
-void GameMgr::MakeEntities(){
-	Ogre::Vector3 pos = Ogre::Vector3(-1000, 0, 0);
+void GameMgr::MakeEntities()
+{
+	/*Ogre::Vector3 pos = Ogre::Vector3(-1000, 0, 0);
 	engine->entityMgr->CreateEntityOfTypeAtPosition(DDG51Type, pos);
 	pos.x += 500;
 	engine->entityMgr->CreateEntityOfTypeAtPosition(CarrierType, pos);
@@ -65,6 +66,6 @@ void GameMgr::MakeEntities(){
 	pos.x = 0;
 	engine->entityMgr->CreateEntityOfTypeAtPosition(BansheeType, pos);
 
-	engine->entityMgr->SelectNextEntity(); //sets selection
+	engine->entityMgr->SelectNextEntity(); //sets selection*/
 }
 

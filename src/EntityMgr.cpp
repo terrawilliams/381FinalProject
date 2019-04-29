@@ -63,40 +63,34 @@ void EntityMgr::Select(int i){
 
 
 
-void EntityMgr::CreateEntityOfTypeAtPosition(EntityTypes entType, Ogre::Vector3 pos){
+void EntityMgr::CreatePlayer1UnitOfType(EntityTypes entType){
 
 	Entity381 * ent;
 	switch(entType){
-	case DDG51Type:
-		//CreateDDG51(pos);
-		ent = (Entity381 *) ( new DDG51(engine, pos, count++));
-		break;
-	case CarrierType:
-//		CreateCarrier(pos);
-		ent = (Entity381 *) (new Carrier(engine, pos, count++));
-		break;
-	case SpeedBoatType:
-		//CreateSpeedBoat(pos);
-		ent =  (Entity381 *) (new SpeedBoat(engine, pos, count++));
-		break;
-	case FrigateType:
-		//CreateFrigate(pos);
-		ent = (Entity381 *) (new Frigate(engine, pos, count++));
-		break;
-	case AlienType:
+	case BasicType:
 		//CreateAlien(pos);
-		ent = (Entity381 *) (new Alien(engine, pos, count++));
-		break;
-	case BansheeType:
-		ent = (Entity381 *) ((FlyingEntity381*) (new Banshee(engine, pos, count++)));
+		ent = (Entity381 *) (new Basic(engine, Ogre::Vector3(-600, 0, 0), count++));
 		break;
 	default:
-		ent = (Entity381*) (new DDG51(engine, pos, count++));//CreateEntity("robot.mesh", pos);
 		break;
 	}
 	ent->Init();
-	entities.push_back(ent);
+	player1->units.push_back(ent);
+}
 
+void EntityMgr::CreatePlayer2UnitOfType(EntityTypes entType){
+
+	Entity381 * ent;
+	switch(entType){
+	case BasicType:
+		//CreateAlien(pos);
+		ent = (Entity381 *) (new Basic(engine, Ogre::Vector3(600, 0, 0), count++));
+		break;
+	default:
+		break;
+	}
+	ent->Init();
+	player2->units.push_back(ent);
 }
 
 void EntityMgr::LoadLevel()
@@ -105,8 +99,15 @@ void EntityMgr::LoadLevel()
 	player2->CreateBase(engine, Ogre::Vector3(600, 50, 0));
 }
 
-void EntityMgr::Tick(float dt){
-	for(int i = 0; i < count; i++){
-		entities[i]->Tick(dt);
+void EntityMgr::Tick(float dt)
+{
+	for(int i = 0; i < player1->units.size(); i++)
+	{
+		player1->units[i]->Tick(dt);
+	}
+
+	for(int i = 0; i < player2->units.size(); i++)
+	{
+		player2->units[i]->Tick(dt);
 	}
 }

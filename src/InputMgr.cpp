@@ -200,19 +200,17 @@ void InputMgr::UpdateSpawn(float dt)
 	if((keyboardTimer < 0) and mKeyboard->isKeyDown(OIS::KC_Z))
 	{
 		keyboardTimer = keyTime;
-		engine->entityMgr->CreateEntityOfTypeAtPosition(SpeedBoatType, Ogre::Vector3(-600, 0, 0));
-		engine->entityMgr->SelectNextEntity();
-		c = new MoveTo(this->engine->entityMgr->selectedEntity, Ogre::Vector3(600, 0, 0));
-		this->engine->entityMgr->selectedEntity->GetAI()->SetCommand(c);
+		engine->entityMgr->CreatePlayer1UnitOfType(BasicType);
+		c = new MoveTo(this->engine->entityMgr->player1->units[engine->entityMgr->player1->units.size() - 1], Ogre::Vector3(600, 0, 0));
+		this->engine->entityMgr->player1->units[engine->entityMgr->player1->units.size() - 1]->GetAI()->SetCommand(c);
 	}
 
 	if((keyboardTimer < 0) and mKeyboard->isKeyDown(OIS::KC_M))
 	{
 		keyboardTimer = keyTime;
-		engine->entityMgr->CreateEntityOfTypeAtPosition(SpeedBoatType, Ogre::Vector3(600, 0, 0));
-		engine->entityMgr->SelectNextEntity();
-		c = new MoveTo(this->engine->entityMgr->selectedEntity, Ogre::Vector3(-600, 0, 0));
-		this->engine->entityMgr->selectedEntity->GetAI()->SetCommand(c);
+		engine->entityMgr->CreatePlayer2UnitOfType(BasicType);
+		c = new MoveTo(this->engine->entityMgr->player2->units[engine->entityMgr->player2->units.size() - 1], Ogre::Vector3(-600, 0, 0));
+		this->engine->entityMgr->player2->units[engine->entityMgr->player2->units.size() - 1]->GetAI()->SetCommand(c);
 	}
 }
 

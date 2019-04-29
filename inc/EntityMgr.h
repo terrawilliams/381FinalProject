@@ -26,7 +26,8 @@ public:
 
   //Ogre::SceneManager *sceneMgr;
 
-  void CreateEntityOfTypeAtPosition(EntityTypes type, Ogre::Vector3 pos);
+  void CreatePlayer1UnitOfType(EntityTypes type);
+  void CreatePlayer2UnitOfType(EntityTypes type);
   void SelectNextEntity();
   void SetSelectedFlyingEntity();
   void Select(int index);
