@@ -52,6 +52,9 @@ public:
 	OgreBites::Label *infoLabel;
 	OgreBites::Label *infoLabel2;
 	OgreBites::Label *infoLabel3;
+	OgreBites::Label *infoPenguinSpawnR;
+	OgreBites::Label *infoPenguinSpawnL;
+	OgreBites::ProgressBar * pbar2;
 };
 
 #endif /* INC_UIMGR_H_ */

@@ -13,6 +13,7 @@ class EntityMgr;
 class GameMgr;
 class GfxMgr;
 class InputMgr;
+class UiMgr;
 
 class Engine {
 public:
@@ -24,6 +25,7 @@ public:
 	GfxMgr    *gfxMgr;
 	InputMgr  *inputMgr;
 	OgreSND::SoundMgr *soundMgr;
+	UiMgr *uiMgr;
 
 	void Init();
 	void Run();

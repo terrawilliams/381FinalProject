@@ -40,36 +40,43 @@ void UiMgr::Stop(){
 }
 
 void UiMgr::LoadLevel(){
-	mTrayMgr->createButton(OgreBites::TL_TOPLEFT, "MyButton", "Spawn Boat!");
-	mTrayMgr->createButton(OgreBites::TL_TOPLEFT, "SelectButton", "Select Next");
+	//mTrayMgr->createButton(OgreBites::TL_TOPLEFT, "MyButton", "Spawn Boat!");
+	//mTrayMgr->createButton(OgreBites::TL_TOPLEFT, "SelectButton", "Select Next");
 
 
-	Ogre::StringVector options;
-	options.push_back("Select Boat");
-	options.push_back("Spawn SpeedBoat");
-	options.push_back("Spawn Destroyer");
-	options.push_back("Spawn Carrier");
-	mTrayMgr->createLongSelectMenu(OgreBites::TL_TOPRIGHT, "MyMenu", "Menu", 300, 4,options);
+	/*Ogre::StringVector options;
+	options.push_back("Select Unit");
+	options.push_back("Spawn Penguin");
+	options.push_back("Spawn Not Penguin");
+	options.push_back("Spawn Not a Penguin");
+	mTrayMgr->createLongSelectMenu(OgreBites::TL_TOPRIGHT, "MyMenu", "Menu", 300, 4,options);*/
 
-	mTrayMgr->showBackdrop("ECSLENT/UI");
-
-	mLabel = mTrayMgr->createLabel(OgreBites::TL_LEFT,"MyLabel","Label!",250);
-
-	infoLabel = mTrayMgr->createLabel(OgreBites::TL_RIGHT, "infoLabel", "No Unit Selected", 250);
-	infoLabel2 = mTrayMgr->createLabel(OgreBites::TL_RIGHT, "infoLabel2", "No Unit Selected", 250);
-	infoLabel3 = mTrayMgr->createLabel(OgreBites::TL_RIGHT, "infoLabel3", "No Unit Selected", 250);
+	//mTrayMgr->showBackdrop("ECSLENT/UI");
+//
+//	mLabel = mTrayMgr->createLabel(OgreBites::TL_LEFT,"MyLabel","Label!",250);
+//
+//	infoLabel = mTrayMgr->createLabel(OgreBites::TL_RIGHT, "infoLabel", "No Unit Selected", 250);
 
 
 	OgreBites::ProgressBar * pbar;
-	pbar = mTrayMgr->createProgressBar(OgreBites::TL_TOP,"HealthBar", "Health", 300, 200);
+	pbar = mTrayMgr->createProgressBar(OgreBites::TL_TOPLEFT,"LeftHealth", "Health", 300, 200);
 	pbar->setProgress(100);
+
+	pbar2 = mTrayMgr->createProgressBar(OgreBites::TL_TOPRIGHT,"RightHealth", "Health", 300, 200);
+	pbar2->setProgress(100);
+
+
+	infoLabel2 = mTrayMgr->createLabel(OgreBites::TL_TOPLEFT, "LeftResources", "Resources: 5", 250);
+	infoLabel3 = mTrayMgr->createLabel(OgreBites::TL_TOPRIGHT, "RightResources", "Resources: 10", 250);
+	infoPenguinSpawnL  = mTrayMgr->createLabel(OgreBites::TL_BOTTOMLEFT, "LeftPenguinSpawn", "Penguin: Z", 250);
+	infoPenguinSpawnR = mTrayMgr->createLabel(OgreBites::TL_BOTTOMRIGHT, "RightPenguinSpawn", "Penguin: M", 250);
 
 }
 
 void UiMgr::Tick(float dt){
 	mTrayMgr->refreshCursor();
 
-	switch(engine->entityMgr->selectedEntity->entityType)
+	/*switch(engine->entityMgr->selectedEntity->entityType)
 	{
 		case DDG51Type:
 			infoLabel->setCaption("Type: DDG51");
@@ -107,7 +114,8 @@ void UiMgr::Tick(float dt){
 			infoLabel3->setCaption("No Unit Selected");
 			break;
 
-	}
+	}*/
+	pbar2->setProgress(engine->entityMgr->player2->currentHealth / 100);
 }
 
 void UiMgr::windowResized(Ogre::RenderWindow* rw){
