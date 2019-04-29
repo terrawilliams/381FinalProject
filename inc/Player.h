@@ -13,13 +13,16 @@
 class Player {
 public:
 	Player();
+	Player(char newSpawnKey);
 	virtual ~Player();
 
-	void CreateBase(Engine* engine);
+	void CreateBase(Engine* engine, Ogre::Vector3 pos);
 	void SpawnUnit(char keyPressed);
 
+	Player* enemy;
 	std::vector<Entity381*> units;
 	Ogre::Entity* playerBase;
+	char spawnKey;
 };
 
 #endif /* PLAYER_H_ */

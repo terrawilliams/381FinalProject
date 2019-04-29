@@ -13,6 +13,11 @@ EntityMgr::EntityMgr(Engine *eng): Mgr(eng){
 	count = 0;
 	selectedEntityIndex = -1;
 	selectedFlyingEntity = 0;
+	player1 = new Player('Z');
+	player2 = new Player('M');
+
+	player1->enemy = player2;
+	player2->enemy = player1;
 }
 
 EntityMgr::~EntityMgr(){
@@ -96,8 +101,8 @@ void EntityMgr::CreateEntityOfTypeAtPosition(EntityTypes entType, Ogre::Vector3 
 
 void EntityMgr::LoadLevel()
 {
-	player1->CreateBase(engine);
-	player2->CreateBase(engine);
+	player1->CreateBase(engine, Ogre::Vector3(-600, 50, 0));
+	player2->CreateBase(engine, Ogre::Vector3(600, 50, 0));
 }
 
 void EntityMgr::Tick(float dt){
