@@ -8,6 +8,7 @@
 #include <EntityMgr.h>
 #include <GfxMgr.h>
 #include <Engine.h>
+#include <MoveTo.h>
 
 EntityMgr::EntityMgr(Engine *eng): Mgr(eng){
 	selectedEntity = 0;
@@ -88,32 +89,52 @@ void EntityMgr::Destroy(Entity381* destroyedEnt)
 
 void EntityMgr::CreatePlayer1UnitOfType(EntityTypes entType){
 
-	Entity381 * ent;
+	Entity381 * ent = 0;
+	int unitCost = 0;
+	Command* c;
 	switch(entType){
 	case BasicType:
 		//CreateAlien(pos);
-		ent = (Entity381 *) (new Basic(engine, Ogre::Vector3(-600, 0, 0), count++));
+		unitCost = 10;
+		if( player1->currentResources - unitCost > 0 )
+			ent = (Entity381 *) (new Basic(engine, Ogre::Vector3(-600, 0, 0), count++));
 		break;
 	default:
 		break;
 	}
-	ent->Init();
-	player1->units.push_back(ent);
+	if(ent)
+	{
+		ent->Init();
+		player1->units.push_back(ent);
+		player1->currentResources -= unitCost;
+		c = new MoveTo(this->engine->entityMgr->player1->units[engine->entityMgr->player1->units.size() - 1], Ogre::Vector3(600, 0, 0));
+		this->engine->entityMgr->player1->units[engine->entityMgr->player1->units.size() - 1]->GetAI()->SetCommand(c);
+	}
 }
 
 void EntityMgr::CreatePlayer2UnitOfType(EntityTypes entType){
 
-	Entity381 * ent;
+	Entity381 * ent = 0;
+	int unitCost = 0;
+	Command* c;
 	switch(entType){
 	case BasicType:
 		//CreateAlien(pos);
-		ent = (Entity381 *) (new Basic(engine, Ogre::Vector3(600, 0, 0), count++));
+		unitCost = 10;
+		if( player2->currentResources - unitCost > 0 )
+			ent = (Entity381 *) (new Basic(engine, Ogre::Vector3(600, 0, 0), count++));
 		break;
 	default:
 		break;
 	}
-	ent->Init();
-	player2->units.push_back(ent);
+	if(ent)
+	{
+		ent->Init();
+		player2->units.push_back(ent);
+		player2->currentResources -= unitCost;
+		c = new MoveTo(this->engine->entityMgr->player2->units[engine->entityMgr->player2->units.size() - 1], Ogre::Vector3(-600, 0, 0));
+		this->engine->entityMgr->player2->units[engine->entityMgr->player2->units.size() - 1]->GetAI()->SetCommand(c);
+	}
 }
 
 void EntityMgr::LoadLevel()

@@ -194,7 +194,6 @@ void InputMgr::UpdateVelocityAndSelection(float dt){
 
 void InputMgr::UpdateSpawn(float dt)
 {
-	Command* c;
 	keyboardTimer -= dt;
 	static bool zDownLastFrame = false, mDownLastFrame =false;
 
@@ -203,8 +202,6 @@ void InputMgr::UpdateSpawn(float dt)
 	{
 		keyboardTimer = keyTime;
 		engine->entityMgr->CreatePlayer1UnitOfType(BasicType);
-		c = new MoveTo(this->engine->entityMgr->player1->units[engine->entityMgr->player1->units.size() - 1], Ogre::Vector3(600, 0, 0));
-		this->engine->entityMgr->player1->units[engine->entityMgr->player1->units.size() - 1]->GetAI()->SetCommand(c);
 	}
 	zDownLastFrame = mKeyboard->isKeyDown(OIS::KC_Z);
 
@@ -212,8 +209,6 @@ void InputMgr::UpdateSpawn(float dt)
 	{
 		keyboardTimer = keyTime;
 		engine->entityMgr->CreatePlayer2UnitOfType(BasicType);
-		c = new MoveTo(this->engine->entityMgr->player2->units[engine->entityMgr->player2->units.size() - 1], Ogre::Vector3(-600, 0, 0));
-		this->engine->entityMgr->player2->units[engine->entityMgr->player2->units.size() - 1]->GetAI()->SetCommand(c);
 	}
 	mDownLastFrame = mKeyboard->isKeyDown(OIS::KC_M);
 }
