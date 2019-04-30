@@ -65,8 +65,8 @@ void UiMgr::LoadLevel(){
 	healthBarR->setProgress(1);
 
 
-	infoLabel2 = mTrayMgr->createLabel(OgreBites::TL_TOPLEFT, "LeftResources", "Resources: 5", 250);
-	infoLabel3 = mTrayMgr->createLabel(OgreBites::TL_TOPRIGHT, "RightResources", "Resources: 10", 250);
+	resourcesL = mTrayMgr->createLabel(OgreBites::TL_TOPLEFT, "LeftResources", "Resources: ", 250);
+	resourcesR = mTrayMgr->createLabel(OgreBites::TL_TOPRIGHT, "RightResources", "Resources: ", 250);
 	infoPenguinSpawnL  = mTrayMgr->createLabel(OgreBites::TL_BOTTOMLEFT, "LeftPenguinSpawn", "Penguin: Z", 250);
 	infoPenguinSpawnR = mTrayMgr->createLabel(OgreBites::TL_BOTTOMRIGHT, "RightPenguinSpawn", "Penguin: M", 250);
 
@@ -116,6 +116,8 @@ void UiMgr::Tick(float dt){
 	}*/
 	healthBarR->setProgress( ((float)engine->entityMgr->player2->currentHealth) / 50);
 	healthBarL->setProgress( ((float)engine->entityMgr->player1->currentHealth) / 50);
+	resourcesR->setCaption("Resources: " + std::to_string( ((int)engine->entityMgr->player2->currentResources)));
+	resourcesL->setCaption("Resources: " + std::to_string( ((int)engine->entityMgr->player1->currentResources)));
 }
 
 void UiMgr::windowResized(Ogre::RenderWindow* rw){

@@ -49,8 +49,8 @@ public:
 	OgreBites::SdkTrayManager* mTrayMgr;
 	Ogre::OverlaySystem* mOverlaySystem;
 	OgreBites::Label *mLabel;
-	OgreBites::Label *infoLabel;
-	OgreBites::Label *infoLabel2;
+	OgreBites::Label *resourcesL;
+	OgreBites::Label *resourcesR;
 	OgreBites::Label *infoLabel3;
 	OgreBites::Label *infoPenguinSpawnR;
 	OgreBites::Label *infoPenguinSpawnL;

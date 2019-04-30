@@ -17,6 +17,8 @@ Player::Player(Engine* newEngine)
 	engine = newEngine;
 	maxHealth = 50;
 	currentHealth = maxHealth;
+	currentResources = 0;
+	resourceCollectionRate = 2;
 }
 
 Player::Player(char newSpawnKey)
@@ -24,6 +26,8 @@ Player::Player(char newSpawnKey)
 	spawnKey = newSpawnKey;
 	maxHealth = 50;
 	currentHealth = maxHealth;
+	currentResources = 0;
+	resourceCollectionRate = 2;
 }
 
 Player::~Player()
@@ -103,5 +107,6 @@ void Player::Tick(float dt)
 		units[i]->GetAI()->SetCommand(c);
 		units[i]->Tick(dt);
 	}
+	currentResources += dt * resourceCollectionRate;
 }
 

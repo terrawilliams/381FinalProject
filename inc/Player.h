@@ -29,6 +29,7 @@ public:
 	Ogre::Vector3 basePosition;
 	char spawnKey;
 	int maxHealth, currentHealth;
+	double currentResources, resourceCollectionRate;
 };
 
 #endif /* PLAYER_H_ */
