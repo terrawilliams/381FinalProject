@@ -58,12 +58,11 @@ void UiMgr::LoadLevel(){
 //	infoLabel = mTrayMgr->createLabel(OgreBites::TL_RIGHT, "infoLabel", "No Unit Selected", 250);
 
 
-	OgreBites::ProgressBar * pbar;
-	pbar = mTrayMgr->createProgressBar(OgreBites::TL_TOPLEFT,"LeftHealth", "Health", 300, 200);
-	pbar->setProgress(100);
+	healthBarL = mTrayMgr->createProgressBar(OgreBites::TL_TOPLEFT,"LeftHealth", "Health", 300, 200);
+	healthBarL->setProgress(1);
 
-	pbar2 = mTrayMgr->createProgressBar(OgreBites::TL_TOPRIGHT,"RightHealth", "Health", 300, 200);
-	pbar2->setProgress(100);
+	healthBarR = mTrayMgr->createProgressBar(OgreBites::TL_TOPRIGHT,"RightHealth", "Health", 300, 200);
+	healthBarR->setProgress(1);
 
 
 	infoLabel2 = mTrayMgr->createLabel(OgreBites::TL_TOPLEFT, "LeftResources", "Resources: 5", 250);
@@ -115,7 +114,8 @@ void UiMgr::Tick(float dt){
 			break;
 
 	}*/
-	pbar2->setProgress(engine->entityMgr->player2->currentHealth / 100);
+	healthBarR->setProgress( ((float)engine->entityMgr->player2->currentHealth) / 50);
+	healthBarL->setProgress( ((float)engine->entityMgr->player1->currentHealth) / 50);
 }
 
 void UiMgr::windowResized(Ogre::RenderWindow* rw){
