@@ -56,6 +56,7 @@ Entity381::Entity381(Engine *engine, Ogre::Vector3 pos, int ident){
 	this->didSelectSoundPlay = false;
 	this->playSound = false;
 	this->entityId = Entity381::nextId++;
+	maxHealth = currentHealth = dps = 0;
 
 }
 
@@ -89,10 +90,11 @@ Basic::Basic(Engine *engine, Ogre::Vector3 pos, int ident):
 	entityType = BasicType;
 	this->minSpeed = 0;
 	this->maxSpeed = 50.0f;//meters per second...
-	this->acceleration = 10.0f; // slow
-	this->turnRate = 40.0f; //2 degrees per second
+	this->acceleration = 500.0f; // slow
+	this->turnRate = 400.0f; //2 degrees per second
 	maxHealth = 10;
 	currentHealth = maxHealth;
+	dps = 1;
 }
 
 Basic::~Basic(){

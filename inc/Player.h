@@ -20,6 +20,8 @@ public:
 
 	void CreateBase(Engine* engine, Ogre::Vector3 pos);
 	void SpawnUnit(char keyPressed);
+	void unitDamage(float dt);
+	void baseDamage(float dt);
 	void Tick(float dt);
 
 	Engine* engine;
@@ -28,7 +30,7 @@ public:
 	Ogre::Entity* playerBase;
 	Ogre::Vector3 basePosition;
 	char spawnKey;
-	int maxHealth, currentHealth;
+	double maxHealth, currentHealth;
 	double currentResources, resourceCollectionRate;
 };
 

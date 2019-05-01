@@ -52,17 +52,18 @@ void GameMgr::LoadLevel()
 
 void GameMgr::Tick(float dt)
 {
-	if(engine->entityMgr->player1->currentHealth <= 0)
-	{
-		engine->gfxMgr->mSceneMgr->destroyEntity(engine->entityMgr->player1->playerBase);
-		//Player2Wins();
-	}
-
-	else if(engine->entityMgr->player2->currentHealth <= 0)
-	{
-		engine->gfxMgr->mSceneMgr->destroyEntity(engine->entityMgr->player2->playerBase);
-		//Player1Wins();
-	}
+	// Moved to player Tick
+//	if(engine->entityMgr->player1->currentHealth <= 0)
+//	{
+//		engine->gfxMgr->mSceneMgr->destroyEntity(engine->entityMgr->player1->playerBase);
+//		//Player2Wins();
+//	}
+//
+//	else if(engine->entityMgr->player2->currentHealth <= 0)
+//	{
+//		engine->gfxMgr->mSceneMgr->destroyEntity(engine->entityMgr->player2->playerBase);
+//		//Player1Wins();
+//	}
 }
 
 void GameMgr::Player1Wins()

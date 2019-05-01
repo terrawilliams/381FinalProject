@@ -114,8 +114,8 @@ void UiMgr::Tick(float dt){
 			break;
 
 	}*/
-	healthBarR->setProgress( ((float)engine->entityMgr->player2->currentHealth) / 50);
-	healthBarL->setProgress( ((float)engine->entityMgr->player1->currentHealth) / 50);
+	healthBarR->setProgress( engine->entityMgr->player2->currentHealth / engine->entityMgr->player2->maxHealth );
+	healthBarL->setProgress( engine->entityMgr->player1->currentHealth / engine->entityMgr->player1->maxHealth );
 	resourcesR->setCaption("Resources: " + std::to_string( ((int)engine->entityMgr->player2->currentResources)));
 	resourcesL->setCaption("Resources: " + std::to_string( ((int)engine->entityMgr->player1->currentResources)));
 }
@@ -135,7 +135,6 @@ void UiMgr::windowClosed(Ogre::RenderWindow* rw){
 }
 
 bool UiMgr::keyPressed(const OIS::KeyEvent &arg) {
-	std::cout << "Key Pressed: " << arg.key << std::endl;
 	return true;
 }
 bool UiMgr::keyReleased(const OIS::KeyEvent &arg){

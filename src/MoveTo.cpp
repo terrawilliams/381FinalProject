@@ -28,7 +28,7 @@ void MoveTo::Tick(float dt)
 	//Calculate velocity
 	this->ourEntity->desiredSpeed = this->ourEntity->maxSpeed;
 
-	std::cout << "tick move" << std::endl;
+//	std::cout << "tick move" << std::endl;
 
 	if(this->ourEntity->position.distance(toPos) < 10)
 	{

@@ -78,33 +78,88 @@ void Player::SpawnUnit(char keyPressed)
 	}
 }
 
+void Player::unitDamage(float dt)
+{
+	for(Entity381* myUnit : units)
+	{
+//		std::cout <<
+		if(enemy->units.size() > 0 and SqrDistanceBetween(myUnit->position, enemy->units[0]->position) < 1000)
+		{
+			enemy->units[0]->currentHealth -= myUnit->dps * dt;
+//				if(units[i]->currentHealth > ->currentHealth)
+//				{
+//					player1->units[i]->currentHealth -= player2->units[j]->currentHealth;
+//					engine->gfxMgr->mSceneMgr->destroyEntity(player2->units[0]->ogreEntity);
+//					player2->units.erase(player2->units.begin());
+//				}
+//				else if(player1->units[i]->currentHealth < player2->units[j]->currentHealth)
+//				{
+//					player2->units[j]->currentHealth -= player1->units[i]->currentHealth;
+//					engine->gfxMgr->mSceneMgr->destroyEntity(player1->units[0]->ogreEntity);
+//					player1->units.erase(player1->units.begin());
+//				}
+//				else
+//				{
+//					engine->gfxMgr->mSceneMgr->destroyEntity(player1->units[0]->ogreEntity);
+//					engine->gfxMgr->mSceneMgr->destroyEntity(player2->units[0]->ogreEntity);
+//					player1->units.erase(player1->units.begin());
+//					player2->units.erase(player2->units.begin());
+//				}
+		}
+	}
+
+	// Delete dead unit
+	if(enemy->units.size() > 0 and enemy->units[0]->currentHealth < 0)
+	{
+		//engine->gfxMgr->mSceneMgr->destroyEntity(enemy->units[0]->ogreEntity);
+		enemy->units[0]->position = Ogre::Vector3(0, -500, 0);
+		enemy->units[0]->Tick(dt);
+		enemy->units.erase(enemy->units.begin());
+	}
+
+}
+
+void Player::baseDamage(float dt)
+{
+	for(int i = 0; i < enemy->units.size(); i++)
+	{
+		if(units.size() == 0 and SqrDistanceBetween(enemy->units[i]->position, basePosition) < 1000)
+		{
+			currentHealth -= enemy->units[i]->dps * dt;
+		}
+	}
+	if(currentHealth < 0)
+	{
+		// Base has died!
+	}
+
+}
+
 void Player::Tick(float dt)
 {
 	Command* c;
 
-	for(int i = 0; i < enemy->units.size(); i++)
-	{
-		if(SqrDistanceBetween(enemy->units[i]->position, basePosition) < 36)
-		{
-			std::cout << "Enemy collided with base///////////////////////////////\n\n" << std::endl;
-			currentHealth -= enemy->units[i]->currentHealth;
-			engine->gfxMgr->mSceneMgr->destroyEntity(enemy->units[i]->ogreEntity);
-			enemy->units.erase(enemy->units.begin());
-		}
-	}
+	unitDamage(dt);
+	baseDamage(dt);
 
 	for(int i = 0; i < units.size(); i++)
 	{
+		c = nullptr;
 		if(enemy->units.empty())
 		{
 			c = new MoveTo(units[i], enemy->basePosition);
 		}
-		else
+		else if ( SqrDistanceBetween(units[i]->position, enemy->units[0]->position) > 1000)
 		{
 			c = new MoveTo(units[i], enemy->units[0]->position);
 		}
-
-		units[i]->GetAI()->SetCommand(c);
+		else
+		{
+			units[i]->GetAI()->commands.clear();
+			units[i]->desiredSpeed = 0;
+		}
+		if(c)
+			units[i]->GetAI()->SetCommand(c);
 		units[i]->Tick(dt);
 	}
 	currentResources += dt * resourceCollectionRate;

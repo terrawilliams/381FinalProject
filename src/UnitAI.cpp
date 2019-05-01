@@ -46,7 +46,6 @@ void UnitAI::AddCommand(Command *c)
 
 void UnitAI::SetCommand(Command* c)
 {
-	std::cout << "set" << std::endl;
 
 	this->commands.clear();
 	AddCommand(c);

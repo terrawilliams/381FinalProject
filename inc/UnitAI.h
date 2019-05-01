@@ -25,7 +25,6 @@ public:
 	void SetCommand(Command* c);
 	void AddCommand(Command* c);
 
-private:
 	std::deque<Command*> commands;
 };
 
