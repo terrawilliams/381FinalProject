@@ -9,6 +9,7 @@ enum EntityTypes {
 	AlienType,
 	BansheeType,
 	BasicType,
+	RobotType,
 	None,
 };
 

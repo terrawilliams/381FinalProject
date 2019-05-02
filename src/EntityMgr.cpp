@@ -99,6 +99,11 @@ void EntityMgr::CreatePlayer1UnitOfType(EntityTypes entType){
 		if( player1->currentResources - unitCost > 0 )
 			ent = (Entity381 *) (new Basic(engine, Ogre::Vector3(-600, 0, 0), count++));
 		break;
+	case RobotType:
+		unitCost = 40;
+		if( player1->currentResources - unitCost > 0 )
+			ent = (Entity381 *) (new Robot(engine, Ogre::Vector3(-600, 0, 0), count++));
+		break;
 	default:
 		break;
 	}
@@ -123,6 +128,11 @@ void EntityMgr::CreatePlayer2UnitOfType(EntityTypes entType){
 		unitCost = 10;
 		if( player2->currentResources - unitCost > 0 )
 			ent = (Entity381 *) (new Basic(engine, Ogre::Vector3(600, 0, 0), count++));
+		break;
+	case RobotType:
+		unitCost = 40;
+		if( player2->currentResources - unitCost > 0 )
+			ent = (Entity381 *) (new Robot(engine, Ogre::Vector3(600, 0, 0), count++));
 		break;
 	default:
 		break;

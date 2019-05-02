@@ -101,5 +101,20 @@ Basic::~Basic(){
 
 }
 //-------------------------------------------------------------------------------------------------------------------------------
+Robot::Robot(Engine *engine, Ogre::Vector3 pos, int ident):
+		Entity381(engine, pos, ident){
+	meshfilename = "robot.mesh";
+	entityType = RobotType;
+	this->minSpeed = 0;
+	this->maxSpeed = 50.0f;//meters per second...
+	this->acceleration = 500.0f; // slow
+	this->turnRate = 400.0f; //2 degrees per second
+	maxHealth = 80;
+	currentHealth = maxHealth;
+	dps = 2;
+}
 
+Robot::~Robot(){
+
+}
 

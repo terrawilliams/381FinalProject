@@ -54,6 +54,8 @@ public:
 	OgreBites::Label *infoLabel3;
 	OgreBites::Label *infoPenguinSpawnR;
 	OgreBites::Label *infoPenguinSpawnL;
+	OgreBites::Label *infoRobotSpawnR;
+	OgreBites::Label *infoRobotSpawnL;
 	OgreBites::ProgressBar * healthBarL;
 	OgreBites::ProgressBar * healthBarR;
 };

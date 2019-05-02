@@ -71,5 +71,11 @@ public:
 
 };
 
+class Robot: public Entity381 {
+	public:
+		Robot(Engine *engine, Ogre::Vector3 pos, int identity);
+		virtual ~Robot();
+};
+
 
 #endif // #ifndef __Entity381_h_

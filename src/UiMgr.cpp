@@ -67,8 +67,10 @@ void UiMgr::LoadLevel(){
 
 	resourcesL = mTrayMgr->createLabel(OgreBites::TL_TOPLEFT, "LeftResources", "Resources: ", 250);
 	resourcesR = mTrayMgr->createLabel(OgreBites::TL_TOPRIGHT, "RightResources", "Resources: ", 250);
-	infoPenguinSpawnL  = mTrayMgr->createLabel(OgreBites::TL_BOTTOMLEFT, "LeftPenguinSpawn", "Penguin: Z", 250);
-	infoPenguinSpawnR = mTrayMgr->createLabel(OgreBites::TL_BOTTOMRIGHT, "RightPenguinSpawn", "Penguin: M", 250);
+	infoPenguinSpawnL  = mTrayMgr->createLabel(OgreBites::TL_BOTTOMLEFT, "LeftPenguinSpawn", "Penguin: Z - $10", 250);
+	infoPenguinSpawnR = mTrayMgr->createLabel(OgreBites::TL_BOTTOMRIGHT, "RightPenguinSpawn", "Penguin: M - $10", 250);
+	infoRobotSpawnL = mTrayMgr->createLabel(OgreBites::TL_BOTTOMLEFT, "LeftRobotSpawn", "Robot: X - $40", 250);
+	infoRobotSpawnR = mTrayMgr->createLabel(OgreBites::TL_BOTTOMRIGHT, "RightRobotSpawn", "Robot: N - $40", 250);
 
 }
 
@@ -116,8 +118,8 @@ void UiMgr::Tick(float dt){
 	}*/
 	healthBarR->setProgress( engine->entityMgr->player2->currentHealth / engine->entityMgr->player2->maxHealth );
 	healthBarL->setProgress( engine->entityMgr->player1->currentHealth / engine->entityMgr->player1->maxHealth );
-	resourcesR->setCaption("Resources: " + std::to_string( ((int)engine->entityMgr->player2->currentResources)));
-	resourcesL->setCaption("Resources: " + std::to_string( ((int)engine->entityMgr->player1->currentResources)));
+	resourcesR->setCaption("Resources: $" + std::to_string( ((int)engine->entityMgr->player2->currentResources)));
+	resourcesL->setCaption("Resources: $" + std::to_string( ((int)engine->entityMgr->player1->currentResources)));
 }
 
 void UiMgr::windowResized(Ogre::RenderWindow* rw){

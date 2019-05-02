@@ -195,9 +195,10 @@ void InputMgr::UpdateVelocityAndSelection(float dt){
 void InputMgr::UpdateSpawn(float dt)
 {
 	keyboardTimer -= dt;
-	static bool zDownLastFrame = false, mDownLastFrame =false;
+	static bool zDownLastFrame = false, mDownLastFrame =false, xDownLastFrame = false, nDownLastFrame = false;
 
 
+	// Player 1
 	if((keyboardTimer < 0) and mKeyboard->isKeyDown(OIS::KC_Z) and not zDownLastFrame)
 	{
 		keyboardTimer = keyTime;
@@ -205,12 +206,30 @@ void InputMgr::UpdateSpawn(float dt)
 	}
 	zDownLastFrame = mKeyboard->isKeyDown(OIS::KC_Z);
 
+
+	if((keyboardTimer < 0) and mKeyboard->isKeyDown(OIS::KC_X) and not mDownLastFrame)
+	{
+		keyboardTimer = keyTime;
+		engine->entityMgr->CreatePlayer1UnitOfType(RobotType);
+	}
+	mDownLastFrame = mKeyboard->isKeyDown(OIS::KC_X);
+
+
+	//////////////Player 2
+
 	if((keyboardTimer < 0) and mKeyboard->isKeyDown(OIS::KC_M) and not mDownLastFrame)
 	{
 		keyboardTimer = keyTime;
 		engine->entityMgr->CreatePlayer2UnitOfType(BasicType);
 	}
 	mDownLastFrame = mKeyboard->isKeyDown(OIS::KC_M);
+
+	if((keyboardTimer < 0) and mKeyboard->isKeyDown(OIS::KC_N) and not mDownLastFrame)
+	{
+		keyboardTimer = keyTime;
+		engine->entityMgr->CreatePlayer2UnitOfType(RobotType);
+	}
+	nDownLastFrame = mKeyboard->isKeyDown(OIS::KC_N);
 }
 
 void InputMgr::LoadLevel(){
