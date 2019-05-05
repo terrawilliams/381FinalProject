@@ -12,6 +12,7 @@
 #include "Intercept.h"
 #include "MoveTo.h"
 #include "GameMgr.h"
+#include <UiMgr.h>
 
 Player::Player(Engine* newEngine)
 {
@@ -111,6 +112,8 @@ void Player::baseDamage(float dt)
 	}
 	if(currentHealth < 0)
 	{
+		engine->uiMgr->createGameOverUi();
+		engine->gameMgr->gameStarted = -1;
 		// Base has died!
 	}
 
@@ -118,7 +121,7 @@ void Player::baseDamage(float dt)
 
 void Player::Tick(float dt)
 {
-	Command* c;
+	Command* c = nullptr;
 
 	unitDamage(dt);
 	baseDamage(dt);
@@ -146,3 +149,17 @@ void Player::Tick(float dt)
 	currentResources += dt * resourceCollectionRate;
 }
 
+void Player::restartGame()
+{
+	currentResources = 0;
+	currentHealth = maxHealth;
+	enemy->currentResources = 0;
+	enemy->currentHealth = enemy->maxHealth;
+
+	for(Entity381* unit : units)
+	{
+		unit->position = Ogre::Vector3(0, -500, 0);
+		unit->Tick(0.1f); // Float doesn't matter, just need to tick so it flys off the screen
+	}
+	units.clear();
+}

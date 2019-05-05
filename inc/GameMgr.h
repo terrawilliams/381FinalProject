@@ -27,7 +27,7 @@ public:
 	void Player2Wins();
 
 	Ogre::SceneNode *cameraNode;
-	int gameStarted; // Made it an int in case we need a third state for game ended or something. Currently 0 is not started, 1 is started.
+	int gameStarted; // Currently 0 is not started, 1 is started, and -1 is game has ended.
 
 };
 

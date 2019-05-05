@@ -127,12 +127,12 @@ void EntityMgr::CreatePlayer2UnitOfType(EntityTypes entType){
 	case BasicType:
 		//CreateAlien(pos);
 		unitCost = 10;
-		if( player2->currentResources - unitCost > 0 )
+		if( player2->currentResources - unitCost >= 0 )
 			ent = (Entity381 *) (new Basic(engine, Ogre::Vector3(600, 0, 0), count++));
 		break;
 	case RobotType:
 		unitCost = 40;
-		if( player2->currentResources - unitCost > 0 )
+		if( player2->currentResources - unitCost >= 0 )
 			ent = (Entity381 *) (new Robot(engine, Ogre::Vector3(600, 0, 0), count++));
 		break;
 	default:
@@ -156,7 +156,7 @@ void EntityMgr::LoadLevel()
 
 void EntityMgr::Tick(float dt)
 {
-	if(engine->gameMgr->gameStarted == 1)
+	if(engine->gameMgr->gameStarted == 1) // I tried putting this in the player tick.. but it seg faulted, so here it is..
 	{
 		player1->Tick(dt);
 		player2->Tick(dt);

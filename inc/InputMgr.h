@@ -50,7 +50,8 @@ public:
 	float deltaDesiredSpeed, deltaDesiredHeading, deltaDesiredAltitude;
 	void UpdateCamera(float dt);
 	void UpdateVelocityAndSelection(float dt);
-	void UpdateSpawn(float dt);
+	void UpdateSpawn();
+	void handleGameCommands();
 
 	void HandleMouseSelection(const OIS::MouseEvent& me);
 	void HandleCommands(const OIS::MouseEvent& me);

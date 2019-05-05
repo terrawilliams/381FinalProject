@@ -93,20 +93,7 @@ void InputMgr::Tick(float dt){
 		engine->keepRunning = false;
 	}
 	mMouse->capture();
-//	mTrayMgr->frameRenderingQueued(fe);
-
-	// UpdateCamera(dt);
-	if(engine->gameMgr->gameStarted == 0)
-	{
-		if(mKeyboard->isKeyDown(OIS::KC_P))
-		{
-			engine->gameMgr->gameStarted = 1;
-			engine->uiMgr->createGameplayLabels();
-		}
-	}
-	else if(engine->gameMgr->gameStarted == 1)
-		UpdateSpawn(dt);
-	//UpdateVelocityAndSelection(dt);
+	handleGameCommands();
 
 }
 
@@ -202,24 +189,21 @@ void InputMgr::UpdateVelocityAndSelection(float dt){
 	}
 }
 
-void InputMgr::UpdateSpawn(float dt)
+void InputMgr::UpdateSpawn()
 {
-	keyboardTimer -= dt;
 	static bool zDownLastFrame = false, mDownLastFrame =false, xDownLastFrame = false, nDownLastFrame = false;
 
 
 	// Player 1
-	if((keyboardTimer < 0) and mKeyboard->isKeyDown(OIS::KC_Z) and not zDownLastFrame)
+	if(mKeyboard->isKeyDown(OIS::KC_Z) and not zDownLastFrame)
 	{
-		keyboardTimer = keyTime;
 		engine->entityMgr->CreatePlayer1UnitOfType(BasicType);
 	}
 	zDownLastFrame = mKeyboard->isKeyDown(OIS::KC_Z);
 
 
-	if((keyboardTimer < 0) and mKeyboard->isKeyDown(OIS::KC_X) and not xDownLastFrame)
+	if(mKeyboard->isKeyDown(OIS::KC_X) and not xDownLastFrame)
 	{
-		keyboardTimer = keyTime;
 		engine->entityMgr->CreatePlayer1UnitOfType(RobotType);
 	}
 	xDownLastFrame = mKeyboard->isKeyDown(OIS::KC_X);
@@ -227,16 +211,14 @@ void InputMgr::UpdateSpawn(float dt)
 
 	//////////////Player 2
 
-	if((keyboardTimer < 0) and mKeyboard->isKeyDown(OIS::KC_M) and not mDownLastFrame)
+	if(mKeyboard->isKeyDown(OIS::KC_M) and not mDownLastFrame)
 	{
-		keyboardTimer = keyTime;
 		engine->entityMgr->CreatePlayer2UnitOfType(BasicType);
 	}
 	mDownLastFrame = mKeyboard->isKeyDown(OIS::KC_M);
 
-	if((keyboardTimer < 0) and mKeyboard->isKeyDown(OIS::KC_N) and not nDownLastFrame)
+	if(mKeyboard->isKeyDown(OIS::KC_N) and not nDownLastFrame)
 	{
-		keyboardTimer = keyTime;
 		engine->entityMgr->CreatePlayer2UnitOfType(RobotType);
 	}
 	nDownLastFrame = mKeyboard->isKeyDown(OIS::KC_N);
@@ -363,4 +345,31 @@ void InputMgr::HandleMouseSelection(const OIS::MouseEvent &me){
 	}
 }
 
+void InputMgr::handleGameCommands()
+{
+	if(engine->gameMgr->gameStarted == 0)
+	{
+		if(mKeyboard->isKeyDown(OIS::KC_P))
+		{
+			engine->gameMgr->gameStarted = 1;
+			engine->uiMgr->mTrayMgr->destroyAllWidgets();
+			engine->uiMgr->createGameplayLabels();
+		}
+	}
+	else if(engine->gameMgr->gameStarted == 1)
+	{
+		UpdateSpawn();
+	}
+	else if(engine->gameMgr->gameStarted == -1)
+	{
+		if(mKeyboard->isKeyDown(OIS::KC_R))
+		{
+			engine->entityMgr->player1->restartGame();
+			engine->entityMgr->player2->restartGame();
+			engine->uiMgr->mTrayMgr->destroyAllWidgets();
+			engine->gameMgr->gameStarted = 1;
+			engine->uiMgr->createGameplayLabels();
+		}
+	}
+}
 

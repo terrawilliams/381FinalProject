@@ -23,6 +23,7 @@ public:
 	void unitDamage(float dt);
 	void baseDamage(float dt);
 	void Tick(float dt);
+	void restartGame();
 
 	Engine* engine;
 	Player* enemy;

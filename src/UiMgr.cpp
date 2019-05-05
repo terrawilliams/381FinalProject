@@ -11,6 +11,7 @@
 #include <InputMgr.h>
 #include <EntityMgr.h>
 #include <Types381.h>
+#include <GameMgr.h>
 
 UiMgr::UiMgr(Engine* eng): Mgr(eng){
 	// Initialize the OverlaySystem (changed for Ogre 1.9)
@@ -42,13 +43,14 @@ void UiMgr::Stop(){
 void UiMgr::LoadLevel(){
 
 	// createGameplayLabels(); Moved to input mgr so a splash screen can be made
+	createSplashScreen();
 
 }
 
 void UiMgr::Tick(float dt){
 	mTrayMgr->refreshCursor();
 
-	if(healthBarL) // So they update only after the game starts.
+	if(engine->gameMgr->gameStarted == 1)
 		updateGameplayLabels();
 }
 
@@ -106,7 +108,9 @@ void UiMgr::buttonHit(OgreBites::Button *b){
 }
 
 void UiMgr::itemSelected(OgreBites::SelectMenu *m){
-    Ogre::Vector3 pos;
+    // Keeping this in case we need to do some selection thing
+
+	/*Ogre::Vector3 pos;
     pos.x = 0;
     pos.y = 0;
     pos.z = 100;
@@ -125,7 +129,7 @@ void UiMgr::itemSelected(OgreBites::SelectMenu *m){
     	break;
     default:
     	break;
-    }
+    }*/
 
 }
 
@@ -158,4 +162,25 @@ void UiMgr::updateGameplayLabels(){
 	healthBarL->setProgress( engine->entityMgr->player1->currentHealth / engine->entityMgr->player1->maxHealth );
 	resourcesR->setCaption("Resources: $" + std::to_string( ((int)engine->entityMgr->player2->currentResources)));
 	resourcesL->setCaption("Resources: $" + std::to_string( ((int)engine->entityMgr->player1->currentResources)));
+}
+
+void UiMgr::createSplashScreen(){
+	mTrayMgr->createLabel(OgreBites::TL_CENTER, "StartButton", "Push P to start the game");
+	mTrayMgr->createLabel(OgreBites::TL_CENTER, "GameDescription", "The game objective is to spawn units to attack enemy units and eventually the enemy's base.");
+	mTrayMgr->createLabel(OgreBites::TL_CENTER, "Player1Description", "Player 1 uses keys: z to spawn penguins and x to spawn robots");
+	mTrayMgr->createLabel(OgreBites::TL_CENTER, "Player2Description", "Player 2 uses keys: n to spawn robots and m to spawn penguins");
+}
+
+void UiMgr::createGameOverUi(){
+	mTrayMgr->destroyAllWidgets(); // Clear the UI
+	std::string winningPlayerMessage = "";
+	if(engine->entityMgr->player1->currentHealth < 0)
+	{
+		winningPlayerMessage = "Player 2 wins!";
+	} else
+	{
+		winningPlayerMessage = "Player 1 wins!";
+	}
+	mTrayMgr->createLabel(OgreBites::TL_CENTER, "PlayerWins", "Congratulations!");
+	mTrayMgr->createLabel(OgreBites::TL_CENTER, "PlayerThatWonMessage", winningPlayerMessage);
 }

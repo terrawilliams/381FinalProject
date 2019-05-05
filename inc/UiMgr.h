@@ -39,6 +39,8 @@ protected:
 public:
     void createGameplayLabels();
     void updateGameplayLabels();
+    void createSplashScreen();
+    void createGameOverUi();
 
 	UiMgr(Engine *engine);
 	~UiMgr();
@@ -50,10 +52,8 @@ public:
 	OgreBites::InputContext mInputContext;
 	OgreBites::SdkTrayManager* mTrayMgr;
 	Ogre::OverlaySystem* mOverlaySystem;
-	OgreBites::Label *mLabel;
 	OgreBites::Label *resourcesL;
 	OgreBites::Label *resourcesR;
-	OgreBites::Label *infoLabel3;
 	OgreBites::Label *infoPenguinSpawnR;
 	OgreBites::Label *infoPenguinSpawnL;
 	OgreBites::Label *infoRobotSpawnR;
