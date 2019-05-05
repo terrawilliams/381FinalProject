@@ -21,6 +21,9 @@ Player::Player(Engine* newEngine)
 	currentHealth = maxHealth;
 	currentResources = 0;
 	resourceCollectionRate = 2;
+	spawnKey = ' ';
+	enemy = nullptr;
+	playerBase = nullptr;
 }
 
 Player::Player(char newSpawnKey)
@@ -30,6 +33,9 @@ Player::Player(char newSpawnKey)
 	currentHealth = maxHealth;
 	currentResources = 0;
 	resourceCollectionRate = 2;
+	enemy = nullptr;
+	playerBase = nullptr;
+	engine = nullptr;
 }
 
 Player::~Player()

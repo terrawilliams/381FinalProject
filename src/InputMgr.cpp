@@ -367,8 +367,8 @@ void InputMgr::handleGameCommands()
 			engine->entityMgr->player1->restartGame();
 			engine->entityMgr->player2->restartGame();
 			engine->uiMgr->mTrayMgr->destroyAllWidgets();
-			engine->gameMgr->gameStarted = 1;
-			engine->uiMgr->createGameplayLabels();
+			engine->gameMgr->gameStarted = 0;
+			engine->uiMgr->createSplashScreen();
 		}
 	}
 }

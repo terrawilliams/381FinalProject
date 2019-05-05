@@ -183,4 +183,5 @@ void UiMgr::createGameOverUi(){
 	}
 	mTrayMgr->createLabel(OgreBites::TL_CENTER, "PlayerWins", "Congratulations!");
 	mTrayMgr->createLabel(OgreBites::TL_CENTER, "PlayerThatWonMessage", winningPlayerMessage);
+	mTrayMgr->createLabel(OgreBites::TL_CENTER, "RestartOption", "Press R to play again.");
 }

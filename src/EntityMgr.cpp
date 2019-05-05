@@ -16,8 +16,8 @@ EntityMgr::EntityMgr(Engine *eng): Mgr(eng){
 	count = 0;
 	selectedEntityIndex = -1;
 	selectedFlyingEntity = 0;
-	player1 = new Player('Z');
-	player2 = new Player('M');
+	player1 = new Player(engine);
+	player2 = new Player(engine);
 
 	player1->enemy = player2;
 	player2->enemy = player1;
