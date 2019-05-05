@@ -37,6 +37,8 @@ protected:
     void itemSelected(OgreBites::SelectMenu *m);
 
 public:
+    void createGameplayLabels();
+    void updateGameplayLabels();
 
 	UiMgr(Engine *engine);
 	~UiMgr();

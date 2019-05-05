@@ -40,86 +40,16 @@ void UiMgr::Stop(){
 }
 
 void UiMgr::LoadLevel(){
-	//mTrayMgr->createButton(OgreBites::TL_TOPLEFT, "MyButton", "Spawn Boat!");
-	//mTrayMgr->createButton(OgreBites::TL_TOPLEFT, "SelectButton", "Select Next");
 
-
-	/*Ogre::StringVector options;
-	options.push_back("Select Unit");
-	options.push_back("Spawn Penguin");
-	options.push_back("Spawn Not Penguin");
-	options.push_back("Spawn Not a Penguin");
-	mTrayMgr->createLongSelectMenu(OgreBites::TL_TOPRIGHT, "MyMenu", "Menu", 300, 4,options);*/
-
-	//mTrayMgr->showBackdrop("ECSLENT/UI");
-//
-//	mLabel = mTrayMgr->createLabel(OgreBites::TL_LEFT,"MyLabel","Label!",250);
-//
-//	infoLabel = mTrayMgr->createLabel(OgreBites::TL_RIGHT, "infoLabel", "No Unit Selected", 250);
-
-
-	healthBarL = mTrayMgr->createProgressBar(OgreBites::TL_TOPLEFT,"LeftHealth", "Health", 300, 200);
-	healthBarL->setProgress(1);
-
-	healthBarR = mTrayMgr->createProgressBar(OgreBites::TL_TOPRIGHT,"RightHealth", "Health", 300, 200);
-	healthBarR->setProgress(1);
-
-
-	resourcesL = mTrayMgr->createLabel(OgreBites::TL_TOPLEFT, "LeftResources", "Resources: ", 250);
-	resourcesR = mTrayMgr->createLabel(OgreBites::TL_TOPRIGHT, "RightResources", "Resources: ", 250);
-	infoPenguinSpawnL  = mTrayMgr->createLabel(OgreBites::TL_BOTTOMLEFT, "LeftPenguinSpawn", "Penguin: Z - $10", 250);
-	infoPenguinSpawnR = mTrayMgr->createLabel(OgreBites::TL_BOTTOMRIGHT, "RightPenguinSpawn", "Penguin: M - $10", 250);
-	infoRobotSpawnL = mTrayMgr->createLabel(OgreBites::TL_BOTTOMLEFT, "LeftRobotSpawn", "Robot: X - $40", 250);
-	infoRobotSpawnR = mTrayMgr->createLabel(OgreBites::TL_BOTTOMRIGHT, "RightRobotSpawn", "Robot: N - $40", 250);
+	// createGameplayLabels(); Moved to input mgr so a splash screen can be made
 
 }
 
 void UiMgr::Tick(float dt){
 	mTrayMgr->refreshCursor();
 
-	/*switch(engine->entityMgr->selectedEntity->entityType)
-	{
-		case DDG51Type:
-			infoLabel->setCaption("Type: DDG51");
-			infoLabel2->setCaption("Heading: " + std::to_string(engine->entityMgr->selectedEntity->heading));
-			infoLabel3->setCaption("Speed: " + std::to_string(engine->entityMgr->selectedEntity->speed));
-			break;
-		case CarrierType:
-			infoLabel->setCaption("Type: Carrier");
-			infoLabel2->setCaption("Heading: " + std::to_string(engine->entityMgr->selectedEntity->heading));
-			infoLabel3->setCaption("Speed: " + std::to_string(engine->entityMgr->selectedEntity->speed));
-			break;
-		case SpeedBoatType:
-			infoLabel->setCaption("Type: SpeedBoat");
-			infoLabel2->setCaption("Heading: " + std::to_string(engine->entityMgr->selectedEntity->heading));
-			infoLabel3->setCaption("Speed: " + std::to_string(engine->entityMgr->selectedEntity->speed));
-			break;
-		case FrigateType:
-			infoLabel->setCaption("Type: Frigate");
-			infoLabel2->setCaption("Heading: " + std::to_string(engine->entityMgr->selectedEntity->heading));
-			infoLabel3->setCaption("Speed: " + std::to_string(engine->entityMgr->selectedEntity->speed));
-			break;
-		case AlienType:
-			infoLabel->setCaption("Type: Alien");
-			infoLabel2->setCaption("Heading: " + std::to_string(engine->entityMgr->selectedEntity->heading));
-			infoLabel3->setCaption("Speed: " + std::to_string(engine->entityMgr->selectedEntity->speed));
-			break;
-		case BansheeType:
-			infoLabel->setCaption("Type: Banshee");
-			infoLabel2->setCaption("Heading: " + std::to_string(engine->entityMgr->selectedEntity->heading));
-			infoLabel3->setCaption("Speed: " + std::to_string(engine->entityMgr->selectedEntity->speed));
-			break;
-		default:
-			infoLabel->setCaption("No Unit Selected");
-			infoLabel2->setCaption("No Unit Selected");
-			infoLabel3->setCaption("No Unit Selected");
-			break;
-
-	}*/
-	healthBarR->setProgress( engine->entityMgr->player2->currentHealth / engine->entityMgr->player2->maxHealth );
-	healthBarL->setProgress( engine->entityMgr->player1->currentHealth / engine->entityMgr->player1->maxHealth );
-	resourcesR->setCaption("Resources: $" + std::to_string( ((int)engine->entityMgr->player2->currentResources)));
-	resourcesL->setCaption("Resources: $" + std::to_string( ((int)engine->entityMgr->player1->currentResources)));
+	if(healthBarL) // So they update only after the game starts.
+		updateGameplayLabels();
 }
 
 void UiMgr::windowResized(Ogre::RenderWindow* rw){
@@ -197,4 +127,35 @@ void UiMgr::itemSelected(OgreBites::SelectMenu *m){
     	break;
     }
 
+}
+
+
+void UiMgr::createGameplayLabels(){
+
+
+	// Health bar info. setProgress is a number from 0 - 1.
+	healthBarL = mTrayMgr->createProgressBar(OgreBites::TL_TOPLEFT,"LeftHealth", "Health", 300, 200);
+	healthBarL->setProgress(1);
+
+	healthBarR = mTrayMgr->createProgressBar(OgreBites::TL_TOPRIGHT,"RightHealth", "Health", 300, 200);
+	healthBarR->setProgress(1);
+
+
+	// Resource info
+	resourcesL = mTrayMgr->createLabel(OgreBites::TL_TOPLEFT, "LeftResources", "Resources: ", 250);
+	resourcesR = mTrayMgr->createLabel(OgreBites::TL_TOPRIGHT, "RightResources", "Resources: ", 250);
+
+	// Spawn info
+	infoPenguinSpawnL  = mTrayMgr->createLabel(OgreBites::TL_BOTTOMLEFT, "LeftPenguinSpawn", "Penguin: Z - $10", 250);
+	infoPenguinSpawnR = mTrayMgr->createLabel(OgreBites::TL_BOTTOMRIGHT, "RightPenguinSpawn", "Penguin: M - $10", 250);
+	infoRobotSpawnL = mTrayMgr->createLabel(OgreBites::TL_BOTTOMLEFT, "LeftRobotSpawn", "Robot: X - $40", 250);
+	infoRobotSpawnR = mTrayMgr->createLabel(OgreBites::TL_BOTTOMRIGHT, "RightRobotSpawn", "Robot: N - $40", 250);
+
+}
+
+void UiMgr::updateGameplayLabels(){
+	healthBarR->setProgress( engine->entityMgr->player2->currentHealth / engine->entityMgr->player2->maxHealth );
+	healthBarL->setProgress( engine->entityMgr->player1->currentHealth / engine->entityMgr->player1->maxHealth );
+	resourcesR->setCaption("Resources: $" + std::to_string( ((int)engine->entityMgr->player2->currentResources)));
+	resourcesL->setCaption("Resources: $" + std::to_string( ((int)engine->entityMgr->player1->currentResources)));
 }

@@ -11,6 +11,7 @@
 #include <InputMgr.h>
 #include <EntityMgr.h>
 #include <GameMgr.h>
+#include <UiMgr.h>
 
 #include <Utils.h>
 #include <MoveTo.h>
@@ -94,8 +95,17 @@ void InputMgr::Tick(float dt){
 	mMouse->capture();
 //	mTrayMgr->frameRenderingQueued(fe);
 
-	UpdateCamera(dt);
-	UpdateSpawn(dt);
+	// UpdateCamera(dt);
+	if(engine->gameMgr->gameStarted == 0)
+	{
+		if(mKeyboard->isKeyDown(OIS::KC_P))
+		{
+			engine->gameMgr->gameStarted = 1;
+			engine->uiMgr->createGameplayLabels();
+		}
+	}
+	else if(engine->gameMgr->gameStarted == 1)
+		UpdateSpawn(dt);
 	//UpdateVelocityAndSelection(dt);
 
 }
@@ -207,12 +217,12 @@ void InputMgr::UpdateSpawn(float dt)
 	zDownLastFrame = mKeyboard->isKeyDown(OIS::KC_Z);
 
 
-	if((keyboardTimer < 0) and mKeyboard->isKeyDown(OIS::KC_X) and not mDownLastFrame)
+	if((keyboardTimer < 0) and mKeyboard->isKeyDown(OIS::KC_X) and not xDownLastFrame)
 	{
 		keyboardTimer = keyTime;
 		engine->entityMgr->CreatePlayer1UnitOfType(RobotType);
 	}
-	mDownLastFrame = mKeyboard->isKeyDown(OIS::KC_X);
+	xDownLastFrame = mKeyboard->isKeyDown(OIS::KC_X);
 
 
 	//////////////Player 2
@@ -224,7 +234,7 @@ void InputMgr::UpdateSpawn(float dt)
 	}
 	mDownLastFrame = mKeyboard->isKeyDown(OIS::KC_M);
 
-	if((keyboardTimer < 0) and mKeyboard->isKeyDown(OIS::KC_N) and not mDownLastFrame)
+	if((keyboardTimer < 0) and mKeyboard->isKeyDown(OIS::KC_N) and not nDownLastFrame)
 	{
 		keyboardTimer = keyTime;
 		engine->entityMgr->CreatePlayer2UnitOfType(RobotType);

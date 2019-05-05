@@ -11,6 +11,7 @@
 #include "EntityMgr.h"
 #include "Intercept.h"
 #include "MoveTo.h"
+#include "GameMgr.h"
 
 Player::Player(Engine* newEngine)
 {
@@ -82,29 +83,9 @@ void Player::unitDamage(float dt)
 {
 	for(Entity381* myUnit : units)
 	{
-//		std::cout <<
 		if(enemy->units.size() > 0 and SqrDistanceBetween(myUnit->position, enemy->units[0]->position) < 1000)
 		{
 			enemy->units[0]->currentHealth -= myUnit->dps * dt;
-//				if(units[i]->currentHealth > ->currentHealth)
-//				{
-//					player1->units[i]->currentHealth -= player2->units[j]->currentHealth;
-//					engine->gfxMgr->mSceneMgr->destroyEntity(player2->units[0]->ogreEntity);
-//					player2->units.erase(player2->units.begin());
-//				}
-//				else if(player1->units[i]->currentHealth < player2->units[j]->currentHealth)
-//				{
-//					player2->units[j]->currentHealth -= player1->units[i]->currentHealth;
-//					engine->gfxMgr->mSceneMgr->destroyEntity(player1->units[0]->ogreEntity);
-//					player1->units.erase(player1->units.begin());
-//				}
-//				else
-//				{
-//					engine->gfxMgr->mSceneMgr->destroyEntity(player1->units[0]->ogreEntity);
-//					engine->gfxMgr->mSceneMgr->destroyEntity(player2->units[0]->ogreEntity);
-//					player1->units.erase(player1->units.begin());
-//					player2->units.erase(player2->units.begin());
-//				}
 		}
 	}
 

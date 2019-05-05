@@ -18,6 +18,8 @@ Engine::Engine() {
 	gameMgr   = 0;
 	gfxMgr    = 0;
 	inputMgr  = 0;
+	soundMgr  = 0;
+	uiMgr     = 0;
 
 	keepRunning = true;
 

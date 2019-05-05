@@ -9,6 +9,7 @@
 #include <GfxMgr.h>
 #include <Engine.h>
 #include <MoveTo.h>
+#include <GameMgr.h>
 
 EntityMgr::EntityMgr(Engine *eng): Mgr(eng){
 	selectedEntity = 0;
@@ -155,8 +156,11 @@ void EntityMgr::LoadLevel()
 
 void EntityMgr::Tick(float dt)
 {
-	player1->Tick(dt);
-	player2->Tick(dt);
+	if(engine->gameMgr->gameStarted == 1)
+	{
+		player1->Tick(dt);
+		player2->Tick(dt);
+	}
 
 	//CheckCollidingUnits();
 	//CheckBaseCollision();

@@ -20,6 +20,7 @@
 
 GameMgr::GameMgr(Engine *engine): Mgr(engine) {
 	cameraNode = 0;
+	gameStarted = 0;
 }
 
 GameMgr::~GameMgr() {
