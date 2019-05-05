@@ -352,7 +352,6 @@ void InputMgr::handleGameCommands()
 		if(mKeyboard->isKeyDown(OIS::KC_P))
 		{
 			engine->gameMgr->gameStarted = 1;
-			engine->uiMgr->mTrayMgr->destroyAllWidgets();
 			engine->uiMgr->createGameplayLabels();
 		}
 	}
@@ -366,7 +365,6 @@ void InputMgr::handleGameCommands()
 		{
 			engine->entityMgr->player1->restartGame();
 			engine->entityMgr->player2->restartGame();
-			engine->uiMgr->mTrayMgr->destroyAllWidgets();
 			engine->gameMgr->gameStarted = 0;
 			engine->uiMgr->createSplashScreen();
 		}

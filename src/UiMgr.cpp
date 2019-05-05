@@ -135,6 +135,7 @@ void UiMgr::itemSelected(OgreBites::SelectMenu *m){
 
 
 void UiMgr::createGameplayLabels(){
+	mTrayMgr->destroyAllWidgets(); // Clear the UI
 
 
 	// Health bar info. setProgress is a number from 0 - 1.
@@ -165,6 +166,7 @@ void UiMgr::updateGameplayLabels(){
 }
 
 void UiMgr::createSplashScreen(){
+	mTrayMgr->destroyAllWidgets(); // Clear the UI
 	mTrayMgr->createLabel(OgreBites::TL_CENTER, "StartButton", "Push P to start the game");
 	mTrayMgr->createLabel(OgreBites::TL_CENTER, "GameDescription", "The game objective is to spawn units to attack enemy units and eventually the enemy's base.");
 	mTrayMgr->createLabel(OgreBites::TL_CENTER, "Player1Description", "Player 1 uses keys: z to spawn penguins and x to spawn robots");

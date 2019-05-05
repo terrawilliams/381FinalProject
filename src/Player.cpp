@@ -75,7 +75,7 @@ void Player::CreateBase(Engine* engine, Ogre::Vector3 pos)
 
 void Player::SpawnUnit(char keyPressed)
 {
-	Command* c;
+	Command* c = nullptr;
 
 	if(keyPressed == spawnKey)
 	{
