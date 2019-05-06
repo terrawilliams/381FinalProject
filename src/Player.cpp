@@ -67,6 +67,8 @@ void Player::CreateBase(Engine* engine, Ogre::Vector3 pos)
 {
 	playerBase = engine->gfxMgr->mSceneMgr->createEntity("Medieval_tower_High.mesh");
 	Ogre::SceneNode* sceneNode = engine->gfxMgr->mSceneMgr->getRootSceneNode()->createChildSceneNode(pos);
+	sceneNode->scale(10, 10, 10);
+	sceneNode->pitch(Ogre::Degree(-90));
 	sceneNode->attachObject(playerBase);
 
 	basePosition = pos;
