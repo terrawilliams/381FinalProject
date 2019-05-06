@@ -170,8 +170,30 @@ void UiMgr::updateGameplayLabels(){
 	resourcesL->setCaption("Resources: $" + std::to_string( ((int)engine->entityMgr->player1->currentResources)));
 }
 
-void UiMgr::createSplashScreen(){
+void UiMgr::createSplashScreen()
+{
+	Ogre::Plane screen;
+	screen.normal = Ogre::Vector3::UNIT_Z;
+	screen.d = -850;
+
+	Ogre::MeshManager::getSingleton().createPlane(
+	    "splashScreen",
+	    Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+	    //plane,
+		screen,
+	    15000, 15000, 20, 20,
+	    true,
+	    1, 5, 5,
+	    Ogre::Vector3::UNIT_Y);
+
+	groundEntity = engine->gfxMgr->mSceneMgr->createEntity("splashScreen");
+	engine->gfxMgr->mSceneMgr->getRootSceneNode()->createChildSceneNode()->attachObject(groundEntity);
+	groundEntity->setCastShadows(false);
+	groundEntity->setMaterialName("Examples/GrassFloor");
+
 	mTrayMgr->destroyAllWidgets(); // Clear the UI
+	mTrayMgr->createLabel(OgreBites::TL_CENTER, "Title", "Tug of War");
+	mTrayMgr->createLabel(OgreBites::TL_CENTER, "Creators", "Created by: Price Poston and Terra Williams");
 	mTrayMgr->createLabel(OgreBites::TL_CENTER, "StartButton", "Push P to start the game");
 	mTrayMgr->createLabel(OgreBites::TL_CENTER, "GameDescription", "The game objective is to spawn units to attack enemy units and eventually the enemy's base.");
 	mTrayMgr->createLabel(OgreBites::TL_CENTER, "Player1Description", "Player 1 uses keys: Z to spawn penguins, X to spawn ninjas, and C to spawn robots.");

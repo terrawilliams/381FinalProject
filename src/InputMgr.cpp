@@ -365,6 +365,7 @@ void InputMgr::handleGameCommands()
 		if(mKeyboard->isKeyDown(OIS::KC_P))
 		{
 			engine->gameMgr->gameStarted = 1;
+			engine->gfxMgr->mSceneMgr->destroyEntity(engine->uiMgr->groundEntity);
 			engine->uiMgr->createGameplayLabels();
 		}
 	}

@@ -49,6 +49,7 @@ public:
 	virtual void LoadLevel();
 	virtual void Stop();
 
+	Ogre::Entity* groundEntity;
 	OgreBites::InputContext mInputContext;
 	OgreBites::SdkTrayManager* mTrayMgr;
 	Ogre::OverlaySystem* mOverlaySystem;
