@@ -19,7 +19,6 @@ public:
 	float SqrDistanceBetween(Ogre::Vector3 ent1Pos, Ogre::Vector3 ent2Pos);
 
 	void CreateBase(Engine* engine, Ogre::Vector3 pos);
-	void SpawnUnit(char keyPressed);
 	void unitDamage(float dt);
 	void baseDamage(float dt);
 	void Tick(float dt);
@@ -33,6 +32,7 @@ public:
 	char spawnKey;
 	double maxHealth, currentHealth;
 	double currentResources, resourceCollectionRate;
+	double baseDps;
 };
 
 #endif /* PLAYER_H_ */

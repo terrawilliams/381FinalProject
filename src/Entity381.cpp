@@ -109,12 +109,28 @@ Robot::Robot(Engine *engine, Ogre::Vector3 pos, int ident):
 	this->maxSpeed = 50.0f;//meters per second...
 	this->acceleration = 500.0f; // slow
 	this->turnRate = 400.0f; //2 degrees per second
-	maxHealth = 80;
+	maxHealth = 40;
 	currentHealth = maxHealth;
-	dps = 2;
+	dps = 1;
 }
 
 Robot::~Robot(){
 
 }
+//-------------------------------------------------------------------------------------------------------------------------------
+Ninja::Ninja(Engine *engine, Ogre::Vector3 pos, int ident):
+		Entity381(engine, pos, ident){
+	meshfilename = "ninja.mesh";
+	entityType = NinjaType;
+	this->minSpeed = 0;
+	this->maxSpeed = 50.0f;//meters per second...
+	this->acceleration = 500.0f; // slow
+	this->turnRate = 400.0f; //2 degrees per second
+	maxHealth = 10;
+	currentHealth = maxHealth;
+	dps = 1;
+}
 
+Ninja::~Ninja(){
+
+}

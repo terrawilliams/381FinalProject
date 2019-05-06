@@ -36,7 +36,12 @@ void Renderable::Tick(float dt){
 //do something;
 	entity->sceneNode->setPosition(entity->position); //now ogre should render the sceneNode at the new position...
 	entity->sceneNode->resetOrientation(); // yaw is cumulative, so set current y-rotation to 0
-	entity->sceneNode->yaw(Ogre::Degree(-entity->heading + 90)); //ogre's yaw is in the direction of -z
+	int fixDegree = 0;
+	if(entity->entityType == BasicType) // If the entity is a penguin, yaw normally + 90 degrees so the penguin goes straight.
+		fixDegree = 90;
+	else if(entity->entityType == NinjaType)
+		fixDegree = -90;
+	entity->sceneNode->yaw(Ogre::Degree(-entity->heading + fixDegree)); //ogre's yaw is in the direction of -z
 	//bounding boxes are rendered so...
 	if(entity->isSelected)
 		entity->sceneNode->showBoundingBox(true);

@@ -54,10 +54,6 @@ public:
 	Ogre::OverlaySystem* mOverlaySystem;
 	OgreBites::Label *resourcesL;
 	OgreBites::Label *resourcesR;
-	OgreBites::Label *infoPenguinSpawnR;
-	OgreBites::Label *infoPenguinSpawnL;
-	OgreBites::Label *infoRobotSpawnR;
-	OgreBites::Label *infoRobotSpawnL;
 	OgreBites::ProgressBar * healthBarL;
 	OgreBites::ProgressBar * healthBarR;
 };

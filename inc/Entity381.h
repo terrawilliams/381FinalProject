@@ -78,4 +78,11 @@ class Robot: public Entity381 {
 };
 
 
+class Ninja: public Entity381 {
+	public:
+		Ninja(Engine *engine, Ogre::Vector3 pos, int identity);
+		virtual ~Ninja();
+};
+
+
 #endif // #ifndef __Entity381_h_

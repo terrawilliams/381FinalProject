@@ -17,25 +17,27 @@
 Player::Player(Engine* newEngine)
 {
 	engine = newEngine;
-	maxHealth = 50;
+	maxHealth = 30;
 	currentHealth = maxHealth;
 	currentResources = 0;
 	resourceCollectionRate = 2;
 	spawnKey = ' ';
 	enemy = nullptr;
 	playerBase = nullptr;
+	baseDps = 1;
 }
 
 Player::Player(char newSpawnKey)
 {
 	spawnKey = newSpawnKey;
-	maxHealth = 50;
+	maxHealth = 30;
 	currentHealth = maxHealth;
 	currentResources = 0;
 	resourceCollectionRate = 2;
 	enemy = nullptr;
 	playerBase = nullptr;
 	engine = nullptr;
+	baseDps = 1;
 }
 
 Player::~Player()
@@ -70,22 +72,8 @@ void Player::CreateBase(Engine* engine, Ogre::Vector3 pos)
 	sceneNode->scale(10, 10, 10);
 	sceneNode->pitch(Ogre::Degree(-90));
 	sceneNode->attachObject(playerBase);
-
 	basePosition = pos;
 	basePosition.y = 0;
-}
-
-void Player::SpawnUnit(char keyPressed)
-{
-	Command* c = nullptr;
-
-	if(keyPressed == spawnKey)
-	{
-		/*engine->entityMgr->CreateEntityOfTypeAtPosition(SpeedBoatType, Ogre::Vector3(-600, 0, 0));
-		engine->entityMgr->SelectNextEntity();
-		c = new MoveTo(unit, enemy->playerBase->mParentNode->getPosition());
-		this->engine->entityMgr->selectedEntity->GetAI()->SetCommand(c);*/
-	}
 }
 
 void Player::unitDamage(float dt)
@@ -94,7 +82,22 @@ void Player::unitDamage(float dt)
 	{
 		if(enemy->units.size() > 0 and SqrDistanceBetween(myUnit->position, enemy->units[0]->position) < 1000)
 		{
-			enemy->units[0]->currentHealth -= myUnit->dps * dt;
+			int enemyUnitType = enemy->units[0]->entityType;
+			double damageDone = myUnit->dps * dt;
+			switch(myUnit->entityType)
+			{
+				case BasicType: // Penguins
+					if(enemyUnitType == RobotType)
+						damageDone *= 2; // Penguins do double damage to robots
+					break;
+				case NinjaType:
+					if(enemyUnitType == BasicType)
+						damageDone *= 2; // Ninja's do double damage to penguins
+					break;
+				default:
+					break;
+			}
+			enemy->units[0]->currentHealth -= damageDone;
 		}
 	}
 
@@ -116,6 +119,14 @@ void Player::baseDamage(float dt)
 		if(units.size() == 0 and SqrDistanceBetween(enemy->units[i]->position, basePosition) < 1000)
 		{
 			currentHealth -= enemy->units[i]->dps * dt;
+			enemy->units[i]->currentHealth -= baseDps * dt;
+			if(enemy->units[i]->currentHealth < 0)
+			{
+				enemy->units[i]->position = Ogre::Vector3(0, -500, 0);
+				enemy->units[i]->Tick(dt);
+				enemy->units.erase(enemy->units.begin() + i);
+				--i; // Go back one cause the current elemeny was deleted.
+			}
 		}
 	}
 	if(currentHealth < 0)

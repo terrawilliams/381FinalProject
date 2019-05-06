@@ -192,7 +192,7 @@ void InputMgr::UpdateVelocityAndSelection(float dt){
 
 void InputMgr::UpdateSpawn()
 {
-	static bool zDownLastFrame = false, mDownLastFrame =false, xDownLastFrame = false, nDownLastFrame = false;
+	static bool zDownLastFrame = false, mDownLastFrame =false, xDownLastFrame = false, nDownLastFrame = false, cDownLastFrame = false, bDownLastFrame = false;
 
 
 	// Player 1
@@ -205,9 +205,15 @@ void InputMgr::UpdateSpawn()
 
 	if(mKeyboard->isKeyDown(OIS::KC_X) and not xDownLastFrame)
 	{
-		engine->entityMgr->CreatePlayer1UnitOfType(RobotType);
+		engine->entityMgr->CreatePlayer1UnitOfType(NinjaType);
 	}
 	xDownLastFrame = mKeyboard->isKeyDown(OIS::KC_X);
+
+	if(mKeyboard->isKeyDown(OIS::KC_C) and not cDownLastFrame)
+	{
+		engine->entityMgr->CreatePlayer1UnitOfType(RobotType);
+	}
+	cDownLastFrame = mKeyboard->isKeyDown(OIS::KC_C);
 
 
 	//////////////Player 2
@@ -220,9 +226,15 @@ void InputMgr::UpdateSpawn()
 
 	if(mKeyboard->isKeyDown(OIS::KC_N) and not nDownLastFrame)
 	{
-		engine->entityMgr->CreatePlayer2UnitOfType(RobotType);
+		engine->entityMgr->CreatePlayer2UnitOfType(NinjaType);
 	}
 	nDownLastFrame = mKeyboard->isKeyDown(OIS::KC_N);
+
+	if(mKeyboard->isKeyDown(OIS::KC_B) and not bDownLastFrame)
+	{
+		engine->entityMgr->CreatePlayer2UnitOfType(RobotType);
+	}
+	bDownLastFrame = mKeyboard->isKeyDown(OIS::KC_B);
 }
 
 void InputMgr::LoadLevel(){

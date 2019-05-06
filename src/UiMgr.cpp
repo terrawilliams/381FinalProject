@@ -151,10 +151,15 @@ void UiMgr::createGameplayLabels(){
 	resourcesR = mTrayMgr->createLabel(OgreBites::TL_TOPRIGHT, "RightResources", "Resources: ", 250);
 
 	// Spawn info
-	infoPenguinSpawnL  = mTrayMgr->createLabel(OgreBites::TL_BOTTOMLEFT, "LeftPenguinSpawn", "Penguin: Z - $10", 250);
-	infoPenguinSpawnR = mTrayMgr->createLabel(OgreBites::TL_BOTTOMRIGHT, "RightPenguinSpawn", "Penguin: M - $10", 250);
-	infoRobotSpawnL = mTrayMgr->createLabel(OgreBites::TL_BOTTOMLEFT, "LeftRobotSpawn", "Robot: X - $40", 250);
-	infoRobotSpawnR = mTrayMgr->createLabel(OgreBites::TL_BOTTOMRIGHT, "RightRobotSpawn", "Robot: N - $40", 250);
+	mTrayMgr->createLabel(OgreBites::TL_BOTTOMLEFT, "LeftPenguinSpawn", "Penguin: Z - $10", 250);
+	mTrayMgr->createLabel(OgreBites::TL_BOTTOMRIGHT, "RightPenguinSpawn", "Penguin: M - $10", 250);
+
+
+	mTrayMgr->createLabel(OgreBites::TL_BOTTOMLEFT, "LeftNinjaSpawn", "Ninja: X - $10", 250);
+	mTrayMgr->createLabel(OgreBites::TL_BOTTOMRIGHT, "RightNinjaSpawn", "Ninja: N - $10", 250);
+
+	mTrayMgr->createLabel(OgreBites::TL_BOTTOMLEFT, "LeftRobotSpawn", "Robot: C - $40", 250);
+	mTrayMgr->createLabel(OgreBites::TL_BOTTOMRIGHT, "RightRobotSpawn", "Robot: B - $40", 250);
 
 }
 
@@ -169,8 +174,12 @@ void UiMgr::createSplashScreen(){
 	mTrayMgr->destroyAllWidgets(); // Clear the UI
 	mTrayMgr->createLabel(OgreBites::TL_CENTER, "StartButton", "Push P to start the game");
 	mTrayMgr->createLabel(OgreBites::TL_CENTER, "GameDescription", "The game objective is to spawn units to attack enemy units and eventually the enemy's base.");
-	mTrayMgr->createLabel(OgreBites::TL_CENTER, "Player1Description", "Player 1 uses keys: z to spawn penguins and x to spawn robots");
-	mTrayMgr->createLabel(OgreBites::TL_CENTER, "Player2Description", "Player 2 uses keys: n to spawn robots and m to spawn penguins");
+	mTrayMgr->createLabel(OgreBites::TL_CENTER, "Player1Description", "Player 1 uses keys: Z to spawn penguins, X to spawn ninjas, and C to spawn robots.");
+	mTrayMgr->createLabel(OgreBites::TL_CENTER, "Player2Description", "Player 2 uses keys: M to spawn penguins, N to spawn ninjas, and B to spawn robots.");
+	mTrayMgr->createLabel(OgreBites::TL_CENTER, "BalanceDescription", "The first entity spawned is the \"tank\" entity. It will absorb all the damage from the opposing units until dead.");
+	mTrayMgr->createLabel(OgreBites::TL_CENTER, "PenguinBalanceDescription", "Penguins do double damage to robots and take double damage from Ninjas. They have 10 health and 1 attack.");
+	mTrayMgr->createLabel(OgreBites::TL_CENTER, "NinjaBalanceDescription", "Ninjas do double damage to penguins. They have 10 health and 1 attack.");
+	mTrayMgr->createLabel(OgreBites::TL_CENTER, "RobotBalanceDescription", "Robots take double damage from penguins. They have 40 health and 1 attack.");
 }
 
 void UiMgr::createGameOverUi(){

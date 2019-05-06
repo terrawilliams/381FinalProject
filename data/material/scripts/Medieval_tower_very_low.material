@@ -1,6 +1,6 @@
 // Medieval tower_very_low genrated by blender2ogre 0.6.0
 
-material Medieval tower_very_low 
+material Medieval tower_very_low
 {
     receive_shadows on 
 

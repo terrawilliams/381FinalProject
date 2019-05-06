@@ -105,6 +105,11 @@ void EntityMgr::CreatePlayer1UnitOfType(EntityTypes entType){
 		if( player1->currentResources - unitCost > 0 )
 			ent = (Entity381 *) (new Robot(engine, Ogre::Vector3(-600, 0, 0), count++));
 		break;
+	case NinjaType:
+		unitCost = 10;
+		if( player1-> currentResources - unitCost >=0 )
+			ent = (Entity381 *) (new Ninja(engine, Ogre::Vector3(-600, 0, 0), count++));
+		break;
 	default:
 		break;
 	}
@@ -135,6 +140,11 @@ void EntityMgr::CreatePlayer2UnitOfType(EntityTypes entType){
 		if( player2->currentResources - unitCost >= 0 )
 			ent = (Entity381 *) (new Robot(engine, Ogre::Vector3(600, 0, 0), count++));
 		break;
+	case NinjaType:
+		unitCost = 10;
+		if( player2-> currentResources - unitCost >=0 )
+			ent = (Entity381 *) (new Ninja(engine, Ogre::Vector3(600, 0, 0), count++));
+		break;
 	default:
 		break;
 	}
@@ -150,8 +160,8 @@ void EntityMgr::CreatePlayer2UnitOfType(EntityTypes entType){
 
 void EntityMgr::LoadLevel()
 {
-	player1->CreateBase(engine, Ogre::Vector3(-600, 50, 0));
-	player2->CreateBase(engine, Ogre::Vector3(600, 50, 0));
+	player1->CreateBase(engine, Ogre::Vector3(-600, 0, 0));
+	player2->CreateBase(engine, Ogre::Vector3(600, 0, 0));
 }
 
 void EntityMgr::Tick(float dt)
