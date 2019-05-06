@@ -93,6 +93,7 @@ void InputMgr::Tick(float dt){
 		engine->keepRunning = false;
 	}
 	mMouse->capture();
+	UpdateCamera(dt);
 	handleGameCommands();
 
 }

@@ -65,7 +65,7 @@ float Player::SqrDistanceBetween(Ogre::Vector3 ent1Pos, Ogre::Vector3 ent2Pos)
 
 void Player::CreateBase(Engine* engine, Ogre::Vector3 pos)
 {
-	playerBase = engine->gfxMgr->mSceneMgr->createEntity("cube.mesh");
+	playerBase = engine->gfxMgr->mSceneMgr->createEntity("Medieval_tower_High.mesh");
 	Ogre::SceneNode* sceneNode = engine->gfxMgr->mSceneMgr->getRootSceneNode()->createChildSceneNode(pos);
 	sceneNode->attachObject(playerBase);
 

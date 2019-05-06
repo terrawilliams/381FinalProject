@@ -86,7 +86,7 @@ void Entity381::Tick(float dt){
 //-------------------------------------------------------------------------------------------------------------------------------
 Basic::Basic(Engine *engine, Ogre::Vector3 pos, int ident):
 		Entity381(engine, pos, ident){
-	meshfilename = "testyboi.mesh";
+	meshfilename = "penguin.mesh";
 	entityType = BasicType;
 	this->minSpeed = 0;
 	this->maxSpeed = 50.0f;//meters per second...
