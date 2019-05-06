@@ -17,14 +17,14 @@
 Player::Player(Engine* newEngine)
 {
 	engine = newEngine;
-	maxHealth = 30;
+	maxHealth = 15;
 	currentHealth = maxHealth;
 	currentResources = 0;
 	resourceCollectionRate = 2;
 	spawnKey = ' ';
 	enemy = nullptr;
 	playerBase = nullptr;
-	baseDps = 1;
+	baseDps = 0.4;
 }
 
 Player::Player(char newSpawnKey)
