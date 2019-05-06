@@ -89,7 +89,7 @@ Basic::Basic(Engine *engine, Ogre::Vector3 pos, int ident):
 	meshfilename = "penguin.mesh";
 	entityType = BasicType;
 	this->minSpeed = 0;
-	this->maxSpeed = 50.0f;//meters per second...
+	this->maxSpeed = 80.0f;//meters per second...
 	this->acceleration = 500.0f; // slow
 	this->turnRate = 400.0f; //2 degrees per second
 	maxHealth = 10;
@@ -106,7 +106,7 @@ Robot::Robot(Engine *engine, Ogre::Vector3 pos, int ident):
 	meshfilename = "robot.mesh";
 	entityType = RobotType;
 	this->minSpeed = 0;
-	this->maxSpeed = 50.0f;//meters per second...
+	this->maxSpeed = 80.0f;//meters per second...
 	this->acceleration = 500.0f; // slow
 	this->turnRate = 400.0f; //2 degrees per second
 	maxHealth = 40;
@@ -123,7 +123,7 @@ Ninja::Ninja(Engine *engine, Ogre::Vector3 pos, int ident):
 	meshfilename = "ninja.mesh";
 	entityType = NinjaType;
 	this->minSpeed = 0;
-	this->maxSpeed = 50.0f;//meters per second...
+	this->maxSpeed = 80.0f;//meters per second...
 	this->acceleration = 500.0f; // slow
 	this->turnRate = 400.0f; //2 degrees per second
 	maxHealth = 10;
